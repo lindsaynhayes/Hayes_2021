@@ -20,7 +20,7 @@ library(lmerTest)
 library(multcomp)
 library(tidyverse)
 ```
-```{r}
+```{r, echo=F}
 data <- read.csv("210309.csv", header=TRUE, stringsAsFactors = TRUE)
 data$TRT <- relevel(data$TRT, ref="SAL")
 ```
@@ -28,13 +28,10 @@ data$TRT <- relevel(data$TRT, ref="SAL")
 ## Plot data
 ```{r, echo=F, fig.width=5, fig.height=3}
 data %>% filter(Group=="CON" | Group =="MIA") %>% ggplot(., aes(x=TRT, y=log2(Serum.IL.6+1), fill=Group)) + geom_boxplot(outlier.shape = NA) + geom_point(position = position_jitterdodge(dodge.width = 0.75, jitter.width = 0.3)) + scale_fill_manual(values= c("grey","red")) + labs(x="",y="Serum IL-6 (log2, au)",fill="") + theme(legend.position="none") + theme_cowplot()
-
-data %>% filter(Group=="CON:CON" | Group =="CON:PLX" | Group=="MIA:CON" | Group =="MIA:PLX", TRT =="LPS") %>% ggplot(., aes(x=TRT, y=log2(Serum.IL.6+1), fill=Group)) + geom_boxplot(outlier.shape = NA) + geom_point(position = position_jitterdodge(dodge.width = 0.75, jitter.width = 0.3)) + scale_fill_manual(values= c("grey", "turquoise3","red", "purple3")) + labs(x="",y="Serum IL-6 (log2, au)",fill="") + theme(legend.position="none") + theme_cowplot() + ylim(0,16)
-
 ```
 
 ## Linear Mixed Effect Model MIA vs CON
-```{r, echo=FALSE}
+```{r, echo=F}
 MvC <- data %>% filter(Group=="CON" | Group =="MIA")
 MvC$Group2 <- factor(MvC$Group2, levels = c("CON:SAL", "CON:LPS", "MIA:SAL", "MIA:LPS"))
 a<-count(unique(MvC %>% filter(Group2 == "CON:SAL") %>% select(Litter)))
@@ -44,7 +41,7 @@ d<-count(unique(MvC %>% filter(Group2 == "MIA:LPS") %>% select(Litter)))
 n <- rbind(table(MvC$Group2), c(a,b,c,d))
 rownames(n) <- c("# mice", "# litters")
 n
-
+message("normality of log2 transformed data")
 e <- MvC %>% filter(Group2=="CON:SAL") %>% mutate(pval = shapiro.test(log2(Serum.IL.6+1))$p.value)
 f <- MvC %>% filter(Group2=="CON:LPS") %>% mutate(pval = shapiro.test(log2(Serum.IL.6+1))$p.value)
 g <- MvC %>% filter(Group2=="MIA:SAL") %>% mutate(pval = shapiro.test(log2(Serum.IL.6+1))$p.value)
@@ -61,6 +58,10 @@ summary(lme.fit)
 ```
 
 ## Linear Mixed Effect Model CON:CON, CON:PLX, MIA:CON, MIA:PLX all after LPS
+## Plot data
+```{r, echo=F, fig.width=5, fig.height=3}
+data %>% filter(Group=="CON:CON" | Group =="CON:PLX" | Group=="MIA:CON" | Group =="MIA:PLX", TRT =="LPS") %>% ggplot(., aes(x=TRT, y=log2(Serum.IL.6+1), fill=Group)) + geom_boxplot(outlier.shape = NA) + geom_point(position = position_jitterdodge(dodge.width = 0.75, jitter.width = 0.3)) + scale_fill_manual(values= c("grey", "turquoise3","red", "purple3")) + labs(x="",y="Serum IL-6 (log2, au)",fill="") + theme(legend.position="none") + theme_cowplot() + ylim(0,16)
+```
 ```{r, echo=FALSE}
 Rescue <- data %>% filter(Group=="CON:CON" | Group =="CON:PLX" | Group=="MIA:CON" | Group =="MIA:PLX", TRT =="LPS")
 Rescue$Group <- factor(Rescue$Group, levels = c("CON:CON", "CON:PLX", "MIA:CON", "MIA:PLX"))
@@ -71,7 +72,7 @@ d<-count(unique(Rescue %>% filter(Group == "MIA:PLX") %>% select(Litter)))
 n<-cbind(table(Rescue$Group, Rescue$TRT), c(a,b,c,d))
 colnames(n) <- c("SAL", "LPS", "# litters")
 n
-
+message("normality of log2 transformed data")
 e <- Rescue %>% filter(Group=="CON:CON") %>% mutate(pval = shapiro.test(log2(Serum.IL.6+1))$p.value)
 f <- Rescue %>% filter(Group=="CON:PLX") %>% mutate(pval = shapiro.test(log2(Serum.IL.6+1))$p.value)
 g <- Rescue %>% filter(Group=="MIA:CON") %>% mutate(pval = shapiro.test(log2(Serum.IL.6+1))$p.value)
