@@ -2,12 +2,12 @@
 plugins:
   - jekyll-remote-theme
   - jekyll-include-cache
+remote_theme: "mmistakes/minimal-mistakes@4.24.0"
 
 
 
 
-
-theme: jekyll-theme-minimal
+#theme: jekyll-theme-minimal
 title: Hayes et al. 2021
 description: "Hayes LN, An K, Carloni E, Li F, Vincent E, Paranjpe M, Dölen G, Goff L, Ramos A, Kano S, Sawa A. Prenatal immune stress induces a prolonged blunting of microglia activation that impacts striatal connectivity."
 logo: 0.tif
