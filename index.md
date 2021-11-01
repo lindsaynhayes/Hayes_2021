@@ -29,6 +29,9 @@ Syntax highlighted code block
 
 [Serum IL-6 after LPS2]( https://github.com/lindsaynhayes/Hayes_2021/gh-pages/LPS_Serum.html )
 
+[Serum IL-6 after LPS2]( https://lindsaynhayes.github.io/Hayes_2021/gh-pages/LPS_Serum.html )
+
+
 For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
 
 ### Jekyll Themes
