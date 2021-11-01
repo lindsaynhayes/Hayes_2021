@@ -1,16 +1,26 @@
+---
+---
+
+@import "{{ site.theme }}"; a, a:visited { color: #006699; text-decoration: none; } "https://pubmed.ncbi.nlm.nih.gov"
+
+
+remote_theme: pages-themes/minimal@v0.2.0
+plugins:
+- jekyll-remote-theme 
 title: Hayes et al. 2021
-theme: minimal-mistakes-jekyll
-minimal_mistakes_skin: "contrast"
-logo: 0.tif
 description: "Hayes LN, An K, Carloni E, Li F, Vincent E, Paranjpe M, Dölen G, Goff L, Ramos A, Kano S, Sawa A. Prenatal immune stress induces a prolonged blunting of microglia activation that impacts striatal connectivity."
-url: "https://pubmed.ncbi.nlm.nih.gov"
-links:
-    - label: "Link to Publication"
-      icon: "fas fa-fw fa-link"
-      url: "https://pubmed.ncbi.nlm.nih.gov"
-    - label: "Twitter"
-      icon: "fab fa-fw fa-twitter-square"
-      url: "https://twitter.com/Lindsay_4c"
-    - label: "GitHub"
-      icon: "fab fa-fw fa-github"
-      url: "https://github.com/lindsaynhayes"
+show_downloads: true
+google_analytics: [Your Google Analytics tracking ID]
+logo: 0.tif
+
+#url: "https://pubmed.ncbi.nlm.nih.gov"
+#links:
+#    - label: "Link to Publication"
+#      icon: "fas fa-fw fa-link"
+#      url: "https://pubmed.ncbi.nlm.nih.gov"
+#    - label: "Twitter"
+#      icon: "fab fa-fw fa-twitter-square"
+#      url: "https://twitter.com/Lindsay_4c"
+#    - label: "GitHub"
+#      icon: "fab fa-fw fa-github"
+#      url: "https://github.com/lindsaynhayes"
