@@ -27,7 +27,7 @@ Syntax highlighted code block
 ```
 [Serum IL-6 after LPS]( https://lindsaynhayes.github.io/Hayes_2021/Serum_IL6/LPS_Serum.html )
 
-[Serum IL-6 after LPS2]( https://github.com/lindsaynhayes/Hayes_2021/blob/gh-pages/Serum_IL6/LPS_Serum.md )
+[Serum IL-6 after LPS2]( https://github.com/lindsaynhayes/Hayes_2021/gh-pages/LPS_Serum.html )
 
 For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
 
