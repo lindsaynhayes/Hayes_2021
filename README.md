@@ -5,5 +5,6 @@ https://lindsaynhayes.github.io/Hayes_2021/
 
 ## **Analyses from rendered htmls**
 
-[Serum IL-6 after LPS]( https://lindsaynhayes.github.io/Hayes_2021/Serum_LPS/Serum_LPS.html )
+[Serum IL-6 after LPS (html)]( https://lindsaynhayes.github.io/Hayes_2021/Serum_LPS/Serum_LPS.html )
+[Serum IL-6 after LPS (script)](https://github.com/lindsaynhayes/Hayes_2021/blob/main/Serum_IL6/LPS_Serum.Rmd)
 
