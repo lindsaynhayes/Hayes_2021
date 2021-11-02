@@ -1,0 +1,43 @@
+---
+title: "QuickPlot"
+author: "LH"
+date: "4/30/2021"
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r, warning=F, message=F, echo=FALSE}
+library(ggplot2)
+library(cowplot)
+tpm <- read.csv("~/Data/RNAseq/FACS-Adult-P4/1.align/expression/TPM.csv", row.names = 1)
+metadata <- read.csv("metadata.csv", stringsAsFactors = TRUE)
+keep <- which(metadata$trt != "P4" & metadata$ID != "S16_MS6")
+metadata <- metadata[keep,]
+metadata$trt <- factor(metadata$trt, levels=c("SAL","LPS"))
+tpm <- tpm[,keep]
+all.equal(colnames(tpm), as.character(metadata$ID))
+
+all.genes <- gsub("\\..*","",rownames(tpm))
+library(AnnotationHub)
+ah <- AnnotationHub()
+edb <- ah[["AH53222"]]
+all.symbol <- mapIds(edb, keys=all.genes, column="SYMBOL", keytype="GENEID", multiVals="first")
+```
+
+## TPM gene expression
+```{r, echo = FALSE}
+goi <- c("Stat1", "B2m", "Il1b", "Irf1", "Myd88")
+for (i in goi){
+pgene = i
+plot_gene = data.frame(t(tpm[(which(all.symbol == pgene)),]))
+plot_gene$group= metadata$group
+plot_gene$trt= metadata$trt
+
+p <- ggplot(plot_gene, aes(x=trt, y=plot_gene[,1], color=group)) + geom_point(stat="summary", fun="median", position = position_dodge(width=0.5), shape="-", size=18) + stat_summary(fun=median, geom = "line", aes(group=group), position = position_dodge(width = 0.5)) + geom_point(size=2, aes(color=group),position=position_dodge(width = 0.5)) + scale_color_manual(values = c("black","red")) + ylab("TPM") + xlab("") + expand_limits(y=0) + theme_cowplot() + labs(subtitle = pgene) + theme(legend.position = "none")
+
+print(p)
+}
+```
+
+
