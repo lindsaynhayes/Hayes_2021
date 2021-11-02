@@ -1,0 +1,123 @@
+---
+title: "ATAC_V3_MIA vs CON after LPS treatment"
+author: "LH"
+date: "3/29/2021"
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+# Analysis of ATAC Seq Data
+MIA vs CON after LPS
+```{r, echo=FALSE, message=FALSE, warning=F}
+library(tidyverse)
+library(DiffBind)
+library(DESeq2)
+library(ggplot2)
+library(cowplot)
+library(genefilter)
+library(qvalue)
+```
+## Load Data
+```{r}
+DBA <- dba.load('dat_34_design')
+DBA
+```
+## Convert to a DESEQ2 object to evaluate interactions
+```{r}
+DDS <- dba.analyze(DBA, bRetrieveAnalysis=DBA_DESEQ2)
+MvCinLPS <- results(DDS, list( c("Condition_MIA_vs_CON","ConditionMIA.TreatmentLPS")))
+```
+
+## Permutation Test for MIA vs CON at LPS
+```{r}
+samples <- read.csv("ATAC_sampleSheet_34.csv", header = TRUE, stringsAsFactors = TRUE)
+table(MvCinLPS$pvalue<0.05, dnn="p-value sig")
+table(MvCinLPS$padj<0.05, dnn="FDR sig")
+```
+
+### Prepare counts for permutation test
+#### reference: http://jtleek.com/genstats/inst/doc/03_14_P-values-and-Multiple-Testing.html
+```{r get count matrix}
+counts <- dba.peakset(DBA, bRetrieve=TRUE, DataType=DBA_DATA_FRAME)
+peaks <- counts[,1:3]
+counts <- counts[,4:37]
+counts <- as.matrix(counts)
+```
+```{r permutation}
+lps <- samples$Treatment == "LPS"
+edata <- counts[,lps]
+group <- samples$Condition[lps]
+group <- factor(group, levels = c("MIA","CON"))
+# sign of t-statistic is group1 - group2 so I want it to be MIA - CON so if + = up, - =down
+set.seed(9)
+B = 1000
+tstats_obj = rowttests(edata,group)
+tstat0 = matrix(NA,nrow=dim(edata)[1],ncol=B)
+tstat = tstats_obj$statistic
+for(i in 1:B){
+  group0 = sample(group)
+  tstat0[,i] = rowttests(edata,group0)$statistic
+}
+```
+
+### t-statistic distribution
+1. the red histogram is the observed t-statistic values for all peaks
+2. the black histogram is the means of the 2000 iterations for all peaks
+```{r plot t}
+t0mean <- apply(tstat0, 1, mean)
+t1 <- hist(t0mean, breaks = 100, plot = F)
+t3 <- hist(tstat, breaks = 100, plot = F)
+plot(t3, col="red", xlim=c(-2,5), ylim=c(0,5000), lty="blank")
+plot(t1, col="black",  add=T, lty="blank")
+```
+
+### Calculate the percentage of null t-values that are more extreme than the test t-value and that becomes the new p-value. 
+```{r}
+th = rep(NA, length(tstat))
+for(i in 1:length(tstat)){
+  th[i] = mean(abs(tstat0[i,])>abs(tstat[i]))
+}
+table(th<0.05)
+
+# 7792 is more than the previous 2212 from DESeq which makes sense because its taking each comparison from its own null distribution. 
+```
+
+### multiple comparison correction of the permuted p-values
+```{r}
+bonf = p.adjust(th,method="bonferroni")
+table(bonf)
+
+bh = p.adjust(th,method="BH")
+table(bh<0.05)
+```
+
+### 113 DAR
+#### compared the raw p-value with the multiple comparison values
+```{r, fig.height=4}
+pp <- cbind(tstats_obj$p.value, bonf, bh)
+colnames(pp)=c("raw.pval", "bonf","bh")
+pp <- as.data.frame(pp)
+a<-ggplot(pp, aes(x=raw.pval, y=bonf)) + geom_point(size=1) + theme_cowplot()
+b<-ggplot(pp, aes(x=raw.pval, y=bh)) + geom_point(size=1) + theme_cowplot()
+plot_grid(a,b)
+```
+
+## Evaluate fold changes
+```{r}
+sig <- bh<0.05
+df <- data.frame((MvCinLPS))
+CON <- edata[,group=="CON"]
+MIA <- edata[,group=="MIA"]
+df$count.con.lps <- apply(CON,1,mean)
+df$count.mia.lps <- apply(MIA,1,mean)
+df$count.fc <- log2(df$count.mia.lps/df$count.con.lps)
+plot(df$log2FoldChange, df$count.fc, xlim=c(-1,1.5), ylim=c(-1,1.5), xlab="DiffBind Fold Change",ylab="Fold Change by Count")
+points(df[sig,]$log2FoldChange, df[sig,]$count.fc, col="red")
+abline(a=0,b=1, col="blue")
+```
+
+Use homer to get peak annotations from bed file (annotatePeaks.pl)
+```{r}
+sessionInfo()
+```
