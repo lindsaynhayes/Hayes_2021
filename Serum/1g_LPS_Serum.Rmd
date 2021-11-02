@@ -12,7 +12,7 @@ editor_options:
 Data analysis of serum protein expression of IL-6 after treatment with saline (SAL) or 4500 EU/g lipopolysaccharide (LPS) for 18 hours. Data are pg/mL.
 
 ## Samples
-```{r, echo=TRUE, message=FALSE}
+```{r, echo=F, message=FALSE}
 library(ggplot2)
 library(cowplot)
 library(lme4)
@@ -23,9 +23,10 @@ library(tidyverse)
 ```{r, echo=F}
 data <- read.csv("210309.csv", header=TRUE, stringsAsFactors = TRUE)
 data$TRT <- relevel(data$TRT, ref="SAL")
+data %>% filter(Group=="CON" | Group =="MIA") %>% count(Group, TRT)
 ```
 
-## Plot data
+## Figure 1g
 ```{r, echo=F, fig.width=5, fig.height=3}
 data %>% filter(Group=="CON" | Group =="MIA") %>% ggplot(., aes(x=TRT, y=log2(Serum.IL.6+1), fill=Group)) + geom_boxplot(outlier.shape = NA) + geom_point(position = position_jitterdodge(dodge.width = 0.75, jitter.width = 0.3)) + scale_fill_manual(values= c("grey","red")) + labs(x="",y="Serum IL-6 (log2, au)",fill="") + theme(legend.position="none") + theme_cowplot()
 ```
@@ -54,37 +55,6 @@ rm(a,b,c,d,e,f,g,h,n,tmp)
 ```
 ```{r}
 lme.fit <- lmer(log2(Serum.IL.6+1) ~ Group*TRT+(1|Litter), data=MvC)
-summary(lme.fit)
-```
-
-## Linear Mixed Effect Model CON:CON, CON:PLX, MIA:CON, MIA:PLX all after LPS
-## Plot data
-```{r, echo=F, fig.width=5, fig.height=3}
-data %>% filter(Group=="CON:CON" | Group =="CON:PLX" | Group=="MIA:CON" | Group =="MIA:PLX", TRT =="LPS") %>% ggplot(., aes(x=TRT, y=log2(Serum.IL.6+1), fill=Group)) + geom_boxplot(outlier.shape = NA) + geom_point(position = position_jitterdodge(dodge.width = 0.75, jitter.width = 0.3)) + scale_fill_manual(values= c("grey", "turquoise3","red", "purple3")) + labs(x="",y="Serum IL-6 (log2, au)",fill="") + theme(legend.position="none") + theme_cowplot() + ylim(0,16)
-```
-```{r, echo=FALSE}
-Rescue <- data %>% filter(Group=="CON:CON" | Group =="CON:PLX" | Group=="MIA:CON" | Group =="MIA:PLX", TRT =="LPS")
-Rescue$Group <- factor(Rescue$Group, levels = c("CON:CON", "CON:PLX", "MIA:CON", "MIA:PLX"))
-a<-count(unique(Rescue %>% filter(Group == "CON:CON") %>% select(Litter)))
-b<-count(unique(Rescue %>% filter(Group == "CON:PLX") %>% select(Litter)))
-c<-count(unique(Rescue %>% filter(Group == "MIA:CON") %>% select(Litter)))
-d<-count(unique(Rescue %>% filter(Group == "MIA:PLX") %>% select(Litter)))
-n<-cbind(table(Rescue$Group, Rescue$TRT), c(a,b,c,d))
-colnames(n) <- c("SAL", "LPS", "# litters")
-n
-message("normality of log2 transformed data")
-e <- Rescue %>% filter(Group=="CON:CON") %>% mutate(pval = shapiro.test(log2(Serum.IL.6+1))$p.value)
-f <- Rescue %>% filter(Group=="CON:PLX") %>% mutate(pval = shapiro.test(log2(Serum.IL.6+1))$p.value)
-g <- Rescue %>% filter(Group=="MIA:CON") %>% mutate(pval = shapiro.test(log2(Serum.IL.6+1))$p.value)
-h <- Rescue %>% filter(Group=="MIA:PLX") %>% mutate(pval = shapiro.test(log2(Serum.IL.6+1))$p.value)
-tmp=rbind(e$pval[1], f$pval[1], g$pval[1], h$pval[1])
-rownames(tmp)=c("CON:CON","CON:PLX","MIA:CON","MIA:PLX")
-colnames(tmp)=c("Shapiro Test for Normality")
-round(tmp,3)
-rm(a,b,c,d,e,f,g,h,n,tmp)
-```
-```{r}
-lme.fit <- lmer(log2(Serum.IL.6+1) ~ Group+(1|Litter), data=Rescue)
 summary(lme.fit)
 ```
 
