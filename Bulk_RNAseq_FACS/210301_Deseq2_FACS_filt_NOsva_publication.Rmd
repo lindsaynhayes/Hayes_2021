@@ -1,0 +1,133 @@
+---
+title: "Deseq2_FACS"
+output: 
+  html_document: 
+    keep_md: yes
+editor_options: 
+  chunk_output_type: console
+---
+
+### Validate blunted microglia immune response using FACS sorted microglia
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+options(digits=3)
+library(ggplot2)
+library(cowplot)
+library(tidyverse)
+library(DESeq2)
+library(org.Mm.eg.db)
+library(AnnotationDbi)
+```
+
+```{r import, message=FALSE, warning=FALSE}
+load("../1.align/txi.rsem.RData")
+metadata <- read.csv("metadata.csv", stringsAsFactors = TRUE)
+metadata$trt <- factor(metadata$trt, levels=c("SAL","LPS", "P4"))
+rownames(metadata) <- metadata$ID
+all.equal(colnames(txi.rsem$counts), as.character(metadata$ID))
+```
+
+### referece: https://rpubs.com/ge600/deseq2
+# Differential gene expression for design: Group + Trt + batch + Group:Trt
+```{r, message=FALSE, warning=FALSE}
+dds <- DESeqDataSetFromTximport(txi.rsem, colData = metadata, design = ~ group + trt + batch + group:trt)
+samp <- colData(dds)$ID != "S16_MS6" & colData(dds)$ID != "S21_M41" # low read counts
+
+# filter low expressed genes
+keep <- rowSums(counts(dds)) >= 75
+table(keep)
+dds <- dds[keep,samp]
+
+# add in gene symbols
+genes <- gsub("\\..*","",rownames(dds))
+# symbols <- mapIds(org.Mm.eg.db, keys=genes, column="SYMBOL", keytype="ENSEMBL", multiVals="first")
+library(AnnotationHub)
+ah <- AnnotationHub()
+edb <- ah[["AH53222"]]
+symbol <- mapIds(edb, keys=genes, column="SYMBOL", keytype="GENEID", multiVals="first")
+mcols(dds) <- cbind(mcols(dds), symbol)
+
+dds <- DESeq(dds)
+resultsNames(dds)
+
+LvSinCON <- (results(dds, name="trt_LPS_vs_SAL", alpha=0.05))
+LvSinMIA <- (results(dds, list( c("trt_LPS_vs_SAL","groupMIA.trtLPS")), alpha=0.05))
+
+LvSinCON$gene <- symbol
+LvSinMIA$gene <- symbol
+```
+
+# LPS Response in CON vs MIA
+```{r, message=FALSE, warning=FALSE}
+LPS.Response <- merge(as.data.frame(LvSinCON[,c(7,1,2,3,4,5,6)]),as.data.frame(LvSinMIA[,c(2,3,4,5,6)]), by="row.names", all.x=TRUE)
+rownames(LPS.Response) <- LPS.Response$Row.names
+colnames(LPS.Response) <- c("gene.id","gene.name","baseMean","log2FC.CON","lfcSE.CON","stat.CON","pval.CON","padj.CON","log2FC.MIA","lfcSE.MIA","stat.MIA","pval.MIA","padj.MIA")
+
+
+#Assign the Group variable for coloring 4-way plot 
+for (i in c(1:nrow(LPS.Response))){
+  if (LPS.Response$padj.CON[i]<0.05 & (!is.na(LPS.Response$padj.CON[i]))){
+    LPS.Response$CONSig[i]='YES'
+  }
+  else {
+    LPS.Response$CONSig[i]='NO'
+  }
+}
+
+for (i in c(1:nrow(LPS.Response))){
+  if (LPS.Response$padj.MIA[i]<0.05 & (!is.na(LPS.Response$padj.MIA[i]))){
+    LPS.Response$MIASig[i]='YES'
+  }
+  else {
+    LPS.Response$MIASig[i]='NO'
+  }
+}
+
+for (i in c(1:nrow(LPS.Response))){
+  if (LPS.Response$CONSig[i]=='YES' & LPS.Response$MIASig[i]=='NO'){
+    LPS.Response$Group[i]=1 }
+  else if (LPS.Response$CONSig[i]=='NO' & LPS.Response$MIASig[i]=='YES'){
+    LPS.Response$Group[i]=2}
+  else if (LPS.Response$CONSig[i]=='YES' & LPS.Response$MIASig[i]=='YES'){
+    LPS.Response$Group[i]=3}
+  else {
+    LPS.Response$Group[i]=4}
+  
+}
+table(LPS.Response$Group)
+LPS.Response.final<-subset(LPS.Response, LPS.Response$Group != 4)
+```
+
+```{r, message=FALSE, warning=FALSE}
+ggplotRegression <- function (fit) {
+require(ggplot2)
+ggplot(fit$model, aes_string(x = names(fit$model)[2], y = names(fit$model)[1])) + 
+  geom_point() +
+  stat_smooth(method = "lm", col = "blue", size=2, se = TRUE) +
+  labs(subtitle = paste(" Slope =",signif(fit$coef[[2]], 3),
+                        " P =",signif(summary(fit)$coef[2,4], 3),
+                        "Adj R2 = ",signif(summary(fit)$adj.r.squared, 3),
+                        "Intercept =",signif(fit$coef[[1]],3 )
+                     ))
+}
+
+ggplot(data = LPS.Response.final, aes(x = log2FC.CON, y = log2FC.MIA, color=factor(Group))) + geom_point() + scale_color_manual(values = c("black", "red","hotpink"), labels = c("CON only","MIA only","CON & MIA")) + geom_abline(slope=1, size=0.5) + labs(x="Con logFC",y="MIA logFC", color="") + theme_cowplot() + geom_vline(xintercept = 0) + geom_hline(yintercept = 0) + xlim(-30,30) + ylim(-30,35)
+
+ggplotRegression(lm(LPS.Response.final$log2FC.MIA ~ LPS.Response.final$log2FC.CON, data=LPS.Response.final)) + geom_abline(slope=1) + labs(x="CON logFC (LPS/SAL)", y="MIA logFC (LPS/SAL)") + theme_cowplot() + xlim(-30,35) + ylim(-30,35)
+
+dim(LPS.Response.final %>% dplyr::filter(log2FC.CON>0 & log2FC.MIA >0 & log2FC.MIA > log2FC.CON)) # 1557
+dim(LPS.Response.final %>% dplyr::filter(log2FC.CON>0 & log2FC.MIA >0 & log2FC.MIA < log2FC.CON)) # 1240
+dim(LPS.Response.final %>% dplyr::filter(log2FC.CON<0 & log2FC.MIA <0 & log2FC.MIA > log2FC.CON)) # 1417
+dim(LPS.Response.final %>% dplyr::filter(log2FC.CON<0 & log2FC.MIA <0 & log2FC.MIA < log2FC.CON)) # 1657
+dim(LPS.Response.final %>% dplyr::filter(log2FC.CON>0 & log2FC.MIA <0)) # 98
+dim(LPS.Response.final %>% dplyr::filter(log2FC.CON<0 & log2FC.MIA >0)) # 138
+```
+
+## Statistical Concordance of MIA and CON LPS Response
+```{r, message=FALSE, warning=FALSE}
+library(epiR)
+epi.ccc(LPS.Response.final$log2FC.CON, LPS.Response.final$log2FC.MIA, ci = "z-transform", conf.level = 0.95)$rho.c
+```
+
+```{r}
+sessionInfo()
+```

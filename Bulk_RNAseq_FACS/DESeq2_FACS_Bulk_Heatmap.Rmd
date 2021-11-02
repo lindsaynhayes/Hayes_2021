@@ -1,0 +1,54 @@
+---
+title: "DESeq2_FACS_Heatmap"
+output: 
+  html_document: 
+    keep_md: yes
+editor_options: 
+  chunk_output_type: console  
+---
+# Figure ED1 - Heatmap
+This is a heatmap and cluster analysis of the adult bulk RNA sequencing data to show cell type specificity.
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+options(digits=4)
+library(tidyverse)
+library(ggplot2)
+library(cowplot)
+library(DESeq2)
+library(org.Mm.eg.db)
+library(AnnotationDbi)
+```
+```{r import}
+tpm <- read.csv("../1.align/expression/TPM.csv", stringsAsFactors = TRUE, row.names = 1)
+metadata <- read.csv("metadata.csv", stringsAsFactors = TRUE)
+metadata$Trt <- factor(metadata$trt, levels=c("SAL","LPS"))
+rownames(metadata) <- metadata$ID
+all.equal(colnames(tpm), as.character(metadata$ID))
+
+genes <- gsub("\\..*","",rownames(tpm))
+symbols <- mapIds(org.Mm.eg.db, keys=genes, column="SYMBOL", keytype="ENSEMBL", multiVals="first")
+
+log_tpm <- log(tpm+1)
+log_tpm$symbol <- symbols
+```
+
+### Heatmap
+```{r heatmap}
+library(pheatmap)
+GOI <- c("Hexb", "Tyrobp", "Tmem119", "Fcrls", "Gpr34", "P2ry12", "P2ry13", "Celf4", "Tubb3", "Eno2", "Aqp4", "Gfap", "Aldh1l1", "Mog", "Cldn11", "Olig1", "Lyve1", "Ttr", "Cd163", "Camp", "Cd36", "Clec4d")
+
+p <- log_tpm[match(GOI, log_tpm$symbol),]
+
+pheatmap(p[,1:38], cluster_rows = FALSE, cluster_cols = TRUE, border_color = NA, main = "Heatmap of Cell Type Specific Markers", labels_row = p$symbol)
+```
+
+### Cluster
+```{r cluster}
+library(ggfortify)
+tree = hclust(dist(t(log_tpm[,1:38])), method = "average")
+plot(tree, main = "hclust, average log(TPM)", sub="", xlab="", cex.lab = 1, cex.axis = 1, cex.main = 1)
+```
+
+```{r}
+sessionInfo()
+```
