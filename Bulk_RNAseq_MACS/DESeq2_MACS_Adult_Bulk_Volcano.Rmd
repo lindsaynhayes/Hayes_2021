@@ -1,0 +1,95 @@
+---
+title: "DESeq2_MACS_Adult_Bulk_Volcano"
+output: 
+  html_document: 
+    keep_md: yes
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+options(digits=4)
+library(tidyverse)
+library(ggplot2)
+library(cowplot)
+library(DESeq2)
+library(org.Mm.eg.db)
+library(AnnotationDbi)
+```
+```{r import}
+load("../1.align/txi.rsem.RData")
+metadata <- read.csv("metadata.csv", stringsAsFactors = TRUE)
+metadata$Trt <- factor(metadata$Trt, levels=c("SAL","LPS"))
+metadata$condition1 <- as.factor(paste(metadata$Group, metadata$Region, metadata$Trt, sep = "."))
+metadata$condition2 <- factor(paste(metadata$Group, metadata$Trt, sep = "."), levels=c("CON.SAL", "CON.LPS", "MIA.SAL", "MIA.LPS"))
+rownames(metadata) <- metadata$ID
+all.equal(colnames(txi.rsem$counts), as.character(metadata$ID))
+```
+
+
+# Main effects
+```{r}
+dds <- DESeqDataSetFromTximport(txi.rsem, colData = metadata, design = ~ Group + Trt + Region)
+dds <- dds[,-21] # exclude MSL3 outlier by cluster
+
+# filter low expressed genes
+keep <- rowSums(counts(dds)) >= 50
+table(keep)
+dds <- dds[keep,]
+
+# add in gene symbols
+genes <- gsub("\\..*","",rownames(dds))
+symbol <- mapIds(org.Mm.eg.db, keys=genes, column="SYMBOL", keytype="ENSEMBL", multiVals="first")
+mcols(dds) <- cbind(mcols(dds), symbol)
+
+dds <- DESeq(dds)
+resultsNames(dds)
+
+group = results(dds, contrast=c("Group","MIA","CON"), alpha=0.05)
+summary(group) # up: 35 down: 128
+
+trt = results(dds, contrast=c("Trt","LPS","SAL"), alpha=0.05)
+summary(trt) # up: 3480 down: 3359
+
+region = results(dds, contrast=c("Region","Str","Ctx"), alpha=0.05)
+summary(region) # up: 461 down: 190
+```
+
+### Volcano plots of DEGs between Group, Treatment, and Brain Region
+```{r, echo=FALSE, message=FALSE, warning = FALSE, fig.height=7, fig.width=5}
+library(EnhancedVolcano)
+group <- lfcShrink(dds, coef = "Group_MIA_vs_CON", type = 'apeglm')
+group$symbol <- mcols(dds)$symbol
+
+trt <- lfcShrink(dds, coef = "Trt_LPS_vs_SAL", type = 'apeglm')
+trt$symbol <- mcols(dds)$symbol
+
+region <- lfcShrink(dds, coef = "Region_Str_vs_Ctx", type = 'apeglm')
+region$symbol <- mcols(dds)$symbol
+
+
+EnhancedVolcano(group, lab = group$symbol, x = 'log2FoldChange', y = 'pvalue',
+    title = 'Group_MIA_vs_CON', subtitle = "", pCutoffCol = 'padj', 
+    xlim = c(-2,3), ylim = c(0, 10), 
+    colAlpha = 1, col=c('grey', 'grey', 'black', 'cornflowerblue'),
+    pCutoff = 0.05, FCcutoff = 0.5, pointSize = 2.0, labSize = 3)
+
+
+
+EnhancedVolcano(trt, lab = trt$symbol, x = 'log2FoldChange', y = 'pvalue',
+    title = 'Trt_LPS_vs_SAL', subtitle = "", pCutoffCol = 'padj', 
+    colAlpha = 1, col=c('grey', 'grey', 'black', 'black'),
+    pCutoff = 0.05, FCcutoff = 0.5, pointSize = 2.0, labSize = 3)
+
+
+
+EnhancedVolcano(region, lab = region$symbol, x = 'log2FoldChange', y = 'pvalue',
+    title = 'Region_Str_vs_Ctx', subtitle = "", pCutoffCol = 'padj', 
+    colAlpha = 1, col=c('grey', 'grey', 'black', 'black'),
+    pCutoff = 0.05, FCcutoff = 0.5, pointSize = 2.0, labSize = 3)
+
+
+```
+```{r}
+sessionInfo()
+```
