@@ -6,7 +6,7 @@ output:
     keep_md: yes
     theme: paper
 ---
-# Figure ED7 - FACS data analysis
+# Figure ED7e - FACS data analysis
 Analysis of myeloid cell density during microglia ablation and reinfiltration of embryos treated with **PLX5622** or **control** chow from E9 to E12. The pregnant dams were **Trt** with "control" or "PLX" chow, and the embryos were collected at **Age** E12, E16, or P1. We FACS sorted the CD45^+^,CD11b^+^ cells and normalized to the control. Data is presented as a ratio of control.
 
 ## Samples

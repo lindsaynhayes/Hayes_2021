@@ -7,3 +7,6 @@ https://lindsaynhayes.github.io/Hayes_2021/
 Serum IL-6 after LPS: 
 [html]( https://lindsaynhayes.github.io/Hayes_2021/Serum_LPS/Serum_LPS.html )  |  [script](https://github.com/lindsaynhayes/Hayes_2021/blob/gh-pages/Serum_LPS/LPS_Serum.Rmd)
 
+
+FACS quantification of MG ablation: 
+[html]( https://lindsaynhayes.github.io/Hayes_2021/FACS/Fig_ED7e.html )  |  [script](https://github.com/lindsaynhayes/Hayes_2021/blob/gh-pages/FACS/Fig_ED7e.Rmd)
