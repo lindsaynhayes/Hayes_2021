@@ -1,0 +1,55 @@
+---
+title: "Bulk Tissue QPCR"
+author: "Lindsay Hayes"
+editor_options: 
+  chunk_output_type: console
+output: 
+  html_document: 
+    keep_md: yes
+---
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+library(ggplot2)
+library(cowplot)
+library(lme4)
+library(lmerTest)
+library(multcomp)
+library(car)
+library(tidyverse)
+library(rstatix)
+
+data<-read.csv("C8-C26-edit.csv", header=TRUE, stringsAsFactors = TRUE)
+data<-data %>% mutate(log2.TNFa = log2(Tnfa), log2.Iba1 = log2(Iba1))
+```
+
+## Plots
+```{r, warning=F, echo=F}
+a=ggplot(data, aes(x=Region, y=log2(Tnfa), fill = Group)) + geom_boxplot(outlier.shape = NA, aes(alpha = 0.5)) + scale_fill_manual(values = c("grey70", "tomato2")) + geom_point(aes(group = Group, color = Sex, shape = Sex), position = position_dodge(width = 0.75), size = 2) + scale_color_manual(values = c("magenta", "blue")) + theme_cowplot() + theme(legend.position = "none")
+
+b=ggplot(data, aes(x=Region, y=log2(Iba1), fill = Group)) + geom_boxplot(outlier.shape = NA, aes(alpha = 0.5)) + scale_fill_manual(values = c("grey70", "tomato2")) + geom_point(aes(group = Group, color = Sex, shape = Sex), position = position_dodge(width = 0.75), size = 2) + scale_color_manual(values = c("magenta", "blue")) + theme_cowplot() + theme(legend.position = "none")
+
+plot_grid(a,b)
+```
+
+# Linear Mixed Effect Model & Type 2 ANOVA
+```{r}
+# TNFa: sufficient litter overlap to model Litter
+data %>% filter(!is.na(Tnfa)) %>% group_by(Group, Region, Sex) %>% summarise(n = n(), mouse = length(unique(Mouse)), litter = length(unique(Litter)))
+
+data %>% group_by(Group, Region, Sex) %>% shapiro_test(log2.TNFa)
+data %>% levene_test((log2.TNFa) ~ Group * Region * Sex)
+
+Anova(aov(log2.TNFa ~ Group + Region + Sex, data=data))
+summary(lmer(log2.TNFa ~ Group + Region + Sex + (1|Litter), data=data))
+ 
+
+# Iba1: not enough litter overlap to properly model
+data %>% filter(!is.na(Iba1)) %>%  group_by(Group, Region, Sex) %>% summarise(n = n(), litters = length(unique(Litter)))
+data %>% group_by(Group, Sex) %>% shapiro_test(log2.Iba1)
+data %>% levene_test(log2.Iba1 ~ Group * Region * Sex)
+Anova(aov(log2.Iba1 ~ Group + Region + Sex, data=data))
+```
+
+#Session Info
+```{r}
+sessionInfo()
+```
