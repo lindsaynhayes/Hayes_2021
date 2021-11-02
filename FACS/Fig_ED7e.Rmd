@@ -1,0 +1,75 @@
+---
+output:
+  html_document: 
+    df_print: default
+    highlight: haddock
+    keep_md: yes
+    theme: paper
+---
+# Figure ED7 - FACS data analysis
+Analysis of myeloid cell density during microglia ablation and reinfiltration of embryos treated with **PLX5622** or **control** chow from E9 to E12. The pregnant dams were **Trt** with "control" or "PLX" chow, and the embryos were collected at **Age** E12, E16, or P1. We FACS sorted the CD45^+^,CD11b^+^ cells and normalized to the control. Data is presented as a ratio of control.
+
+## Samples
+```{r, message=FALSE, echo=FALSE}
+options(digits=3)
+library(readr)
+library(tidyverse)
+library(ggplot2)
+library(cowplot)
+library(outliers)
+library(psych)
+library(ggplot2)
+library(cowplot)
+
+data<-read_csv("FACS-data-Myeloid.csv")
+table(data$Trt, data$Age, dnn = c("Treatment","    Stage"))
+```
+
+## Plot
+```{r, echo=FALSE}
+ggplot(data, aes(x=Age, y=Myeloid, fill=Group)) + geom_bar(stat="summary", fun.y="mean",position="dodge",aes(fill=Group))+ stat_summary(fun.data=mean_se, geom="errorbar", width=0.25, position=position_dodge(width=0.9))+ geom_point(size=1.5,color="grey50", position=position_dodge(width = 0.9)) + labs(title="", y="% of Control", x="Stage Collected") + scale_fill_manual(values = c("black","black","black","cyan3","cyan3","cyan3"))
+```
+
+## Perform t-test on E12 FACS data
+```{r,echo=FALSE}
+E12<-subset(data, data$Age=="E12")
+E12.control=shapiro.test(E12[E12$Trt=="Control",]$Myeloid)$p.value
+E12.mia=shapiro.test(E12[E12$Trt=="PLX",]$Myeloid)$p.value
+pow=rbind(E12.control,E12.mia)
+colnames(pow)="Shapiro test for normality p-value"
+pow
+t.test(E12$Myeloid~E12$Trt)
+```
+### Conclusion: Data was normally distributed therefore a t-test was performed. PLX significantly decreased the myeloid cells in E12 embryos. 
+
+***
+## Perform t-test on E16 FACS data
+```{r, echo=FALSE}
+E16<-subset(data, data$Age=="E16")
+E16.control=shapiro.test(E16[E16$Trt=="Control",]$Myeloid)$p.value
+E16.mia=shapiro.test(E16[E16$Trt=="PLX",]$Myeloid)$p.value
+pow=rbind(E16.control,E16.mia)
+colnames(pow)="Shapiro test for normality p-value"
+pow
+t.test(E16$Myeloid~E16$Trt)
+```
+### Conclusion: Data was normally distributed therefore a t-test was performed. Myeloid cell repopulation after PLX treatment is still significantly decreased in E16 embryos. 
+***
+
+## Perform t-test on P1 FACS data
+```{r, echo=FALSE}
+P1<-subset(data, data$Age=="P1")
+P1.control=shapiro.test(P1[P1$Trt=="Control",]$Myeloid)$p.value
+P1.mia=shapiro.test(P1[P1$Trt=="PLX",]$Myeloid)$p.value
+pow=rbind(P1.control,P1.mia)
+colnames(pow)="Shapiro test for normality p-value"
+pow
+t.test(P1$Myeloid~P1$Trt)
+```
+### Conclusion: Data was normally distributed therefore a t-test was performed. Myeloid cell repopulation is recovered after PLX treatment but is slightly increased at P1. 
+
+### Reproducibility info
+```{r, echo=FALSE}
+Sys.time()
+devtools::session_info()
+```

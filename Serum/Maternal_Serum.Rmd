@@ -1,0 +1,81 @@
+---
+title: "Maternal_Serum"
+author: "Lindsay Hayes"
+output: 
+  html_document: 
+    keep_md: yes
+editor_options: 
+  chunk_output_type: console
+---
+
+# Extended Data Figures
+**ELISA** data for maternal serum IL-6 response three hours after PIC treatment at 0, 5, 10, or 20 mg/kg to pregnant dams at E9.5. Units of data are pg/mL.
+
+## Samples
+```{r, echo=FALSE, message=FALSE}
+library(tidyverse)
+library(ggplot2)
+library(cowplot)
+library(multcomp)
+library(rstatix)
+
+data <- read.csv("210217-Maternal Serum Summary.csv", stringsAsFactors = TRUE)
+data <- data %>% mutate(log2.IL6 = log2(IL.6.pg.mL+1))
+table(data$pups, data$Dose,dnn=c("pups survived?", "  mg/kg PIC"))
+table(data$Group, data$pups)
+```
+
+## Plot MIA vs CON dose response
+### Fig ED 10e
+```{r, echo=FALSE, warning=F}
+Survive = data %>% filter(pups=="y") %>% filter(Group == "CON" | Group =="MIA")
+Survive$Dose = as.factor(Survive$Dose)
+a= ggplot(Survive, aes(x=Dose, y=IL.6.pg.mL, fill=Dose)) + geom_boxplot(outlier.shape = NA) + geom_point(position = position_jitter(width = 0.2))+ scale_fill_manual(values=c("grey", "pink", "red", "dark red")) + theme_cowplot() + labs(x="mg/kg PIC", y="3H Maternal Serum \nIL-6 (pg/mL)") + theme(legend.position="none")
+
+b= ggplot(Survive, aes(x=Dose, y=log2.IL6, fill=Dose)) + geom_boxplot(outlier.shape = NA) + geom_point(position = position_jitter(width = 0.2))+ scale_fill_manual(values=c("grey", "pink", "red", "dark red")) + theme_cowplot() + labs(x="mg/kg PIC", y="3H Maternal Serum \nIL-6 (log2)") + theme(legend.position="none")
+
+plot_grid(a,b)
+```
+
+## ANOVA for dose effect
+```{r, tidy=T, warning=FALSE}
+Survive %>% group_by(Dose) %>% summarise(n = n())
+Survive %>% group_by(Dose) %>% shapiro_test(log2.IL6)
+Survive %>% group_by(Dose) %>% shapiro_test(IL.6.pg.mL)
+Survive %>% levene_test(IL.6.pg.mL ~ Dose)
+
+aov.out <- aov(IL.6.pg.mL ~ Dose, data=Survive)
+summary(aov.out)
+summary(glht(aov.out, linfct = mcp(Dose = "Tukey"), test = adjusted("BH")))
+```
+
+**ELISA** data for maternal serum IL-6 response three hours after PIC treatment along with prenatal PLX treatment. Units of data are pg/mL.
+
+## Maternal Response with PLX treatment
+### Fig ED 7f
+```{r, warning=F, echo=F}
+Rescue = data %>% filter(pups=="y") %>% filter(Group == "CON:CON" | Group =="MIA:CON" | Group == "CON:PLX" | Group =="MIA:PLX") %>% filter(status=="ok")
+Rescue$Group <- factor(Rescue$Group)
+
+a=ggplot(Rescue, aes(x=Group, y=IL.6.pg.mL, fill=Group)) + geom_boxplot(outlier.shape = NA) + geom_point(position = position_jitter(width = 0.2)) + scale_fill_manual(values=c("grey", "turquoise3", "red", "purple3")) + theme_cowplot() + labs(x="", y="3H Maternal Serum \nIL-6 (pg/mL)") + theme(legend.position="none") + ylim(0,20000) + theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1))
+
+b=ggplot(Rescue, aes(x=Group, y=log2.IL6, fill=Group)) + geom_boxplot(outlier.shape = NA) + geom_point(position = position_jitter(width = 0.2)) + scale_fill_manual(values=c("grey", "turquoise3", "red", "purple3")) + theme_cowplot() + labs(x="", y="3H Maternal Serum \nIL-6 (log2 pg/mL + 1)") + theme(legend.position="none")  + theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1))
+
+plot_grid(a,b)
+```
+
+## ANOVA for Rescue effect
+```{r}
+Rescue %>% group_by(Group) %>% summarise(n = n())
+
+Rescue %>% group_by(Group) %>% shapiro_test(log2.IL6)
+Rescue %>% levene_test(log2.IL6 ~ Group)
+
+aov.out <- aov(log2.IL6 ~ Group, data=Rescue)
+summary(aov.out)
+summary(glht(aov.out, linfct = mcp(Group = c("CON:PLX - CON:CON == 0", "MIA:CON - CON:CON == 0", "MIA:PLX - CON:CON == 0", "MIA:PLX - MIA:CON == 0")), test = adjusted("BH")))
+```
+
+```{r}
+sessionInfo()
+```

@@ -1,0 +1,197 @@
+---
+output:
+  html_document:
+    df_print: default
+    fig_height: 4
+    fig_width: 4
+    highlight: haddock
+    keep_md: yes
+    theme: paper
+  html_notebook: default
+editor_options:
+  chunk_output_type: console
+---
+
+# Morphometric analysis of CD68 content in microglia by 63X confocal microscopy
+
+**Dependent variables:** iba1.vol, cd68.vol, perc.cd68
+**Unit of measure:** n is a cell
+**Fixed Effects:** group (MIA, CON), trt (SAL, LPS), region (dorsal striatum (DS) & ventral striatum (VS))
+
+
+```{r, echo=FALSE, message=FALSE}
+library(ggplot2)
+library(cowplot)
+library(lme4)
+library(lmerTest)
+library(multcomp)
+library(tidyverse)
+library(car)
+library(rstatix)
+library(ggpubr)
+```
+```{r, echo=FALSE}
+data <- read.csv("mg.cd68.csv", stringsAsFactors = TRUE)
+data$trt <- factor(data$trt, levels = c("SAL", "LPS"))
+data$group2 <- factor(data$group2, levels=c("CON:SAL","CON:LPS","MIA:SAL","MIA:LPS"))
+data$cellID <- paste(data$id, data$slice, data$cell, sep = ".")
+
+data %>% group_by(group, trt, region) %>% summarise(n = n(), mouse = length(unique(id)), litter = length(unique(litter)))
+```
+
+### Plot microglia volume, cd68 volume and % CD68, n= per cell
+### black = CON, red = MIA
+
+```{r, echo=FALSE, fig.height=3}
+ggplot(data, aes(x=trt, y=iba1.vol, fill=group2)) +  geom_boxplot(outlier.shape=NA) + geom_point(position=position_dodge(width = 0.75), size=1) + scale_fill_manual(values = c("grey","grey","red","red")) + theme_cowplot() + ylim(0,5000) + facet_wrap(~ region) + labs(x="Dorsal Striatum    Ventral Striatum", y="microglia volume", color="") + theme(legend.position="NA")
+
+ggplot(data, aes(x=trt, y=cd68.vol, fill=group2)) +  geom_boxplot(outlier.shape=NA) + geom_point(position=position_dodge(width = 0.75), size=1) + scale_fill_manual(values = c("grey","grey","red","red")) + theme_cowplot() + ylim(0,200) + facet_wrap(~ region) + labs(x="Dorsal Striatum    Ventral Striatum", y="Cd68 volume", color="") + theme(legend.position="NA")
+
+ggplot(data, aes(x=trt, y=perc.cd68, fill=group2)) +  geom_boxplot(outlier.shape=NA) + geom_point(position=position_dodge(width = 0.75), size=1) + scale_fill_manual(values = c("grey","grey","red","red")) + theme_cowplot() + ylim(0,12) + facet_wrap(~ region) + labs(y="volume CD68/ volume microglia", color="") + theme(legend.position="NA")
+``` 
+
+
+# 3-way ANOVA (group x region x trt)
+### Iba1.Vol
+```{r}
+# get summary data
+data %>%
+  group_by(group, region, trt) %>%
+  get_summary_stats(iba1.vol, type = "mean_sd")
+
+# Build the linear model
+model  <- lm(iba1.vol ~ group+trt+region+group:trt, data = data)
+
+# Compute Shapiro-Wilk test of normality and levene test for equal variance
+data %>% group_by(trt, region, group) %>% shapiro_test(iba1.vol)
+data %>% levene_test(iba1.vol ~ group*trt*region)
+
+res.aov <- data %>% anova_test(iba1.vol ~ group+trt+region+group:trt)
+res.aov
+aov.out <- lm(iba1.vol ~ group+trt+region+group:trt, data = data)
+Anova(aov.out) 
+
+data %>%
+  group_by(trt, region) %>%
+  anova_test(iba1.vol ~ group, error = aov.out)
+
+pwc <- data %>%
+  group_by(trt, region) %>%
+  emmeans_test(iba1.vol ~ group, p.adjust.method = "fdr")
+pwc
+
+# posthoc emmeans
+
+data %>% 
+  emmeans_test(
+    iba1.vol ~ group, p.adjust.method = "fdr", model = model)
+
+pwc <- pwc %>% add_xy_position(x = "region")
+bxp <- ggboxplot(data, x = "region", y = "iba1.vol", color = "group", palette = "jco", facet.by = "trt",  add.params = list(size=0.5))
+bxp +
+  stat_pvalue_manual(pwc) +
+  labs(
+    subtitle = get_test_label(res.aov, detailed = TRUE),
+    caption = get_pwc_label(pwc))
+```
+
+
+# Cd68.Vol
+```{r}
+# get summary data
+data %>%
+  group_by(group, region, trt) %>%
+  get_summary_stats(cd68.vol, type = "mean_sd")
+
+# Build the linear model
+model  <- lm(cd68.vol ~ group+trt+region+group:trt, data = data)
+
+# Compute Shapiro-Wilk test of normality and levene test for equal variance
+data %>% group_by(trt, region, group) %>% shapiro_test(cd68.vol)
+data %>% levene_test(cd68.vol ~ group*trt*region)
+
+res.aov <- data %>% anova_test(cd68.vol ~ group+trt+region+group:trt)
+res.aov
+aov.out <- lm(cd68.vol ~ group+trt+region+group:trt, data = data)
+Anova(aov.out) 
+
+data %>%
+  group_by(trt, region) %>%
+  anova_test(cd68.vol ~ group, error = aov.out)
+
+pwc <- data %>%
+  group_by(trt, region) %>%
+  emmeans_test(cd68.vol ~ group, p.adjust.method = "fdr")
+pwc
+
+# posthoc
+data %>% 
+  emmeans_test(
+    cd68.vol ~ group, p.adjust.method = "fdr", model = model)
+
+pwc <- pwc %>% add_xy_position(x = "region")
+bxp <- ggboxplot(data, x = "region", y = "cd68.vol", color = "group", palette = "jco", facet.by = "trt",  add.params = list(size=0.5))
+bxp +
+  stat_pvalue_manual(pwc) +
+  labs(
+    subtitle = get_test_label(res.aov, detailed = TRUE),
+    caption = get_pwc_label(pwc))
+```
+
+
+# Percent CD68
+```{r}
+# get summary data
+data %>%
+  group_by(group, region, trt) %>%
+  get_summary_stats(perc.cd68, type = "mean_sd")
+
+# Build the linear model
+model  <- lm(perc.cd68 ~ group+trt+region+group:trt, data = data)
+
+# Compute Shapiro-Wilk test of normality and levene test for equal variance
+data %>% group_by(trt, region, group) %>% shapiro_test(perc.cd68)
+data %>% levene_test(perc.cd68 ~ group*trt*region)
+
+res.aov <- data %>% anova_test(perc.cd68 ~ group+trt+region+group:trt)
+res.aov
+
+model  <- lm(perc.cd68 ~ group*trt+region, data = data)
+data %>%
+  group_by(trt) %>%
+  anova_test(perc.cd68 ~ group+region, error = aov.out)
+
+data %>%
+  group_by(region) %>%
+  anova_test(perc.cd68 ~ group*trt, error = aov.out)
+
+data %>%
+  group_by(trt, region) %>%
+  anova_test(perc.cd68 ~ group, error = aov.out)
+
+library(emmeans)
+pwc <- data %>%
+  group_by(trt, region) %>%
+  emmeans_test(perc.cd68 ~ group, p.adjust.method = "bh") %>%
+  select(-df, -statistic, -p) 
+
+pwc <- data %>%
+  group_by(trt, region) %>%
+  emmeans_test(perc.cd68 ~ group, p.adjust.method = "fdr")
+pwc
+
+pwc <- pwc %>% add_xy_position(x = "trt")
+bxp <- ggboxplot(data, x = "trt", y = "perc.cd68", color = "group", palette = "jco", facet.by = "region",  add.params = list(size=0.5))
+bxp +
+  stat_pvalue_manual(pwc) +
+  labs(
+    subtitle = get_test_label(res.aov, detailed = TRUE),
+    caption = get_pwc_label(pwc))
+```
+
+### reference: https://www.datanovia.com/en/lessons/anova-in-r/
+### Reproducibility info
+```{r, echo=FALSE}
+Sys.time()
+devtools::session_info()
+```

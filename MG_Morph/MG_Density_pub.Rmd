@@ -1,0 +1,57 @@
+---
+output:
+  html_document: 
+    df_print: default
+    fig_height: 4
+    fig_width: 4
+    highlight: haddock
+    keep_md: yes
+    theme: paper
+editor_options: 
+  chunk_output_type: console
+---
+
+# Microglia cell density analysis by 10X confocal microscopy with Imaris quantification. 
+
+```{r, echo=FALSE, message=FALSE}
+library(tidyverse)
+library(ggplot2)
+library(cowplot)
+library(lme4)
+library(lmerTest)
+library(rstatix)
+
+data <- read.csv("mg.density.csv",header=TRUE, stringsAsFactors = TRUE)
+
+data %>% group_by(group, trt, region) %>% summarise(mouse = length(unique(id)), litter = length(unique(litter)))
+```
+
+### Cell Density Plot by Group n = animals
+```{r, echo=FALSE}
+mean.data <- read.csv("mg.density.mouse.csv", stringsAsFactors = TRUE)
+
+mean.data$group2 <- factor(mean.data$group2, levels = c("CON:SAL","CON:LPS","MIA:SAL","MIA:LPS"))
+mean.data$trt <- factor(mean.data$trt, levels = c("SAL","LPS"))
+
+ggplot(mean.data, aes(x=trt, y=cells.mm3, fill=group2)) + geom_boxplot(outlier.shape=NA)+ scale_fill_manual(values = c("grey","grey","red","red")) + facet_wrap(~ region) + theme_cowplot() + labs(x="Dorsal Striatum    Ventral Striatum", y="microglia/mm3", fill="") + ylim(0,16000) + geom_point(position=position_dodge(width = 0.75), size=2)
+```
+
+### ANOVA
+```{r}
+mean.data %>% group_by(group, region, trt) %>% shapiro_test(cells.mm3)
+mean.data %>% levene_test(cells.mm3 ~ group*trt*region)
+
+summary(aov(cells.mm3 ~ group+trt+region, data=mean.data))
+```
+
+### Conclusions
+- Treatment does not effect microglia density
+- MIA does not effected microglia density in SAL or LPS
+
+
+
+### Reproducibility info
+```{r, echo=FALSE}
+Sys.time()
+devtools::session_info()
+```

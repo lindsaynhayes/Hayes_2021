@@ -1,0 +1,64 @@
+---
+output:
+  html_document: 
+    df_print: default
+    highlight: haddock
+    keep_md: yes
+    theme: paper
+editor_options: 
+  chunk_output_type: console
+---
+
+# Morphometric analysis of cell complexity in microglia by 63X confocal microscopy
+
+**Dependent variables:** no.intersections **Independent variables:** dist.soma.um
+**Unit of measure:** n is a cell
+**Fixed Effects:** group (MIA, CON), trt (SAL, LPS), region (dorsal striatum (DS) & ventral striatum (VS))
+**Random Effects:** id (mice), litter (mom id to identify siblings)
+
+```{r, echo=FALSE, message=FALSE}
+library(tidyverse)
+library(ggplot2)
+library(cowplot)
+library(lme4)
+library(lmerTest)
+```
+```{r}
+data <- read.csv("mg.sholl.csv",header=TRUE, stringsAsFactors = TRUE)
+data$trt <- factor(data$trt, levels = c("SAL", "LPS"))
+data$group2 <- factor(data$group2, levels=c("CON:SAL","CON:LPS","MIA:SAL","MIA:LPS"))
+data$cellID <- paste(data$id, data$slice, data$cell, sep = ".")
+
+data %>% group_by(group, trt, region) %>% summarise(n = length(unique(cellID)), mouse = length(unique(id)), litter = length(unique(litter)))
+```
+
+### Plots
+```{r, echo=FALSE, fig.width=8, fig.height=3, warning=F, message=F}
+# CON:SAL = black, CON:LPS = blue, MIA:SAL = maroon, MIA:LPS = red
+a <- data %>% filter(dist.soma.um > 2) %>% filter(region =="DS") %>% ggplot(., aes(x=dist.soma.um, y=no.intersections, color=group2)) +  geom_smooth(se=FALSE) + stat_summary(fun.data=mean_se, geom="pointrange")+ scale_color_manual(values = c("grey50","black","darkred","red")) + theme_cowplot() + labs(subtitle = "dorsal striatum", color="") + coord_cartesian(xlim=c(2,50), ylim = c(0,20)) + theme(legend.position = "none")
+
+b <- data %>% filter(dist.soma.um > 2) %>% filter(region =="VS") %>% ggplot(., aes(x=dist.soma.um, y=no.intersections, color=group2)) +  geom_smooth(se=FALSE) + stat_summary(fun.data=mean_se, geom="pointrange")+ scale_color_manual(values = c("grey50","black","darkred","red")) + theme_cowplot() + labs(subtitle = "ventral striatum", color="") + coord_cartesian(xlim=c(2,50), ylim = c(0,20)) + theme(legend.position = "none")
+
+plot_grid(a,b)
+``` 
+
+
+# Linear Regression
+```{r}
+lme.fit <- lmer(no.intersections ~ dist.soma.um + group * trt + region + (1|litter), data=data)
+summary(lme.fit)
+
+mod0 <- lmer(no.intersections ~ dist.soma.um + group * trt + region + (1|litter), data=data)
+mod1 <- lmer(no.intersections ~ dist.soma.um + group + trt + region + (1|litter), data=data)
+mod2 <- lmer(no.intersections ~ dist.soma.um + trt + region + (1|litter), data=data)
+
+anova(mod0, mod1) # interaction effect  # SIG
+anova(mod0, mod2) # main group          # SIG
+```
+
+
+### Reproducibility info
+```{r, echo=FALSE}
+Sys.time()
+devtools::session_info()
+```
