@@ -121,6 +121,13 @@ ggplot(fit$model, aes_string(x = names(fit$model)[2], y = names(fit$model)[1])) 
 ggplotRegression(lm(LPS.Response.final$log2FC.MIA ~ LPS.Response.final$log2FC.CON, data=LPS.Response.final)) + geom_abline(slope=1) + labs(x="CON log2FC (LPS/SAL)", y="MIA log2FC (LPS/SAL)") + xlim(-10, 11) + ylim(-10, 11) + theme_cowplot()
 ```
 
+## Concordance Correlation Coefficient (CCC) of MIA and CON LPS Response in Ctx
+```{r, message=FALSE}
+library(epiR)
+# concordance correlation coefficient
+epi.ccc(LPS.Response.final$log2FC.CON, LPS.Response.final$log2FC.MIA, ci = "z-transform", conf.level = 0.95)$rho.c
+```
+
 # STR LPS Response in CON vs MIA
 ```{r, warning=F, message=F}
 # add in gene symbols
@@ -173,6 +180,13 @@ table(LPS.Response$Group)
 LPS.Response.final<-subset(LPS.Response, LPS.Response$Group != 4)
 
 ggplotRegression(lm(LPS.Response.final$log2FC.MIA ~ LPS.Response.final$log2FC.CON, data=LPS.Response.final)) + geom_abline(slope=1) + labs(x="CON log2FC (LPS/SAL)", y="MIA log2FC (LPS/SAL)") + xlim(-10, 11) + ylim(-10, 11) + theme_cowplot()
+```
+
+## Concordance Correlation Coefficient (CCC) of MIA and CON LPS Response in Str
+```{r, message=FALSE}
+library(epiR)
+# concordance correlation coefficient
+epi.ccc(LPS.Response.final$log2FC.CON, LPS.Response.final$log2FC.MIA, ci = "z-transform", conf.level = 0.95)$rho.c
 ```
 
 # Differential gene expression for design: Region + Trt + Region:Trt
