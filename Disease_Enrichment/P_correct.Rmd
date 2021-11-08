@@ -1,0 +1,19 @@
+---
+title: "Disease Enrichment Multiple Comparison Correction"
+output: html_notebook
+---
+
+# Multiple Comparison Correction
+```{r}
+labs <- c("ADHD", "AUT", "BPD", "DEP", "SZ")
+p <- c(ADHD, AUT, BPD, DEP, SZ)
+
+bon <- (p.adjust(p, method = "bonferroni"))
+names(bon) <- labs
+
+bh <- (p.adjust(p, method = "BH"))
+names(bh) <- labs
+
+cbind(round(p,3),round(bh,3), round(bon,3))
+cbind(p, bh, bon)
+```
