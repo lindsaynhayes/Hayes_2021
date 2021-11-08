@@ -1,0 +1,58 @@
+---
+title: "DESeq2_FACS_Rescue_PCA_hclust"
+output: 
+  html_document: 
+    keep_md: yes
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r, echo=FALSE, message=FALSE, error=FALSE, warning=FALSE}
+options(digits=3)
+library(tidyverse)
+library(ggplot2)
+library(cowplot)
+library(DESeq2)
+library(org.Mm.eg.db)
+library(AnnotationDbi)
+library(AnnotationHub)
+library(ggrepel)
+library(ggfortify)
+```
+```{r import}
+load("../1.align/txi.rsem.RData")
+metadata <- read.csv("metadata.csv", stringsAsFactors = TRUE)
+metadata$Trt <- factor(metadata$Trt, levels=c("SAL","LPS"))
+rownames(metadata) <- metadata$ID
+all.equal(colnames(txi.rsem$counts), rownames(metadata))
+```
+
+# Differential gene expression for design: Group + Drug + Trt
+```{r dds, warning=FALSE, message = FALSE}
+dds <- DESeqDataSetFromTximport(txi.rsem, colData = metadata, design = ~ Group + Drug + Trt)
+
+# filter low expressed genes
+keep <- rowSums(counts(dds)) >= 50
+table(keep)
+dds <- dds[keep,]
+
+dds <- DESeq(dds)
+resultsNames(dds)
+```
+
+## PCA
+```{r pca, warning=FALSE}
+vsd <- vst(dds, blind=FALSE)
+m <- plotPCA(vsd, intgroup=c("Group", "Drug"), returnData = TRUE)
+ggplot(m, aes(PC1, PC2, color = group)) + geom_point(size = 3) + theme_cowplot() + xlab("PC1: 71% variance") + ylab("PC2: 7% variance") + geom_text_repel(aes(label = name)) + scale_color_manual(values = c("black", "turquoise3", "red", "purple2"))
+```
+
+### Cluster
+```{r cluster}
+tree = hclust(dist(t(assay(vsd))), method = "average")
+plot(tree, main = "hclust, average VST", sub="", xlab="", cex.lab = 1, cex.axis = 1, cex.main = 1)
+```
+
+```{r}
+sessionInfo()
+```

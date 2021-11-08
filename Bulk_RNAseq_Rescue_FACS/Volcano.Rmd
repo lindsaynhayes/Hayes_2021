@@ -1,0 +1,77 @@
+---
+title: "DESeq2_FACS_Rescue_Volcano"
+output: 
+  html_document: 
+    keep_md: yes
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r, echo=FALSE, message=FALSE, error=FALSE, warning=FALSE}
+options(digits=3)
+library(tidyverse)
+library(ggplot2)
+library(cowplot)
+library(DESeq2)
+library(org.Mm.eg.db)
+library(ggrepel)
+library(EnhancedVolcano)
+```
+```{r import}
+load("../1.align/txi.rsem.RData")
+metadata <- read.csv("metadata.csv", stringsAsFactors = TRUE)
+metadata$Trt <- factor(metadata$Trt, levels=c("SAL","LPS"))
+rownames(metadata) <- metadata$ID
+all.equal(colnames(txi.rsem$counts), rownames(metadata))
+```
+
+# Differential gene expression for design: Group + Drug + Trt
+```{r dds, warning=FALSE, message = FALSE}
+dds <- DESeqDataSetFromTximport(txi.rsem, colData = metadata, design = ~ Group + Drug + Trt)
+samp <- colData(dds)$ID != "CCL3" & colData(dds)$ID != "MPS1"
+
+# filter low expressed genes
+keep <- rowSums(counts(dds)) >= 50
+table(keep)
+dds <- dds[keep,samp]
+
+
+# add in gene symbols
+genes <- gsub("\\..*","",rownames(dds))
+symbol <- mapIds(org.Mm.eg.db, keys=genes, column="SYMBOL", keytype="ENSEMBL", multiVals="first")
+mcols(dds) <- DataFrame(symbol)
+
+dds <- DESeq(dds)
+resultsNames(dds)
+```
+
+### Volcano
+```{r}
+group <- lfcShrink(dds, coef = "Group_MIA_vs_CON", type = 'apeglm')
+group$symbol <- mcols(dds)$symbol
+
+drug <- lfcShrink(dds, coef = "Drug_PLX_vs_CON", type = 'apeglm')
+drug$symbol <- mcols(dds)$symbol
+
+trt <- lfcShrink(dds, coef = "Trt_LPS_vs_SAL", type = 'apeglm')
+trt$symbol <- mcols(dds)$symbol
+
+
+EnhancedVolcano(group, lab = group$symbol, x = 'log2FoldChange', y = 'pvalue',
+    title = 'Group_MIA_vs_CON', subtitle = "", pCutoffCol = 'padj', ylim = c(0,6), 
+    xlim = c(-2,2), colAlpha = 1, col=c('grey', 'grey', 'black', 'cornflowerblue'),
+    pCutoff = 0.1, FCcutoff = 0.5, pointSize = 2.0, labSize = 3)
+
+
+EnhancedVolcano(drug, lab = drug$symbol, x = 'log2FoldChange', y = 'pvalue',
+    title = 'Drug_PLX_vs_CON', subtitle = "", pCutoffCol = 'padj', 
+    colAlpha = 1, col=c('grey', 'grey', 'black', 'black'), ylim=c(0,20), xlim=c(-2,3),
+    pCutoff = 0.05, FCcutoff = 0.5, pointSize = 2.0, labSize = 3)
+
+
+EnhancedVolcano(trt, lab = trt$symbol, x = 'log2FoldChange', y = 'pvalue',
+    title = 'Trt_LPS_vs_SAL', subtitle = "", pCutoffCol = 'padj', 
+    colAlpha = 1, col=c('grey', 'grey', 'black', 'black'),
+    pCutoff = 0.05, FCcutoff = 0.5, pointSize = 2.0, labSize = 3)
+```
+
