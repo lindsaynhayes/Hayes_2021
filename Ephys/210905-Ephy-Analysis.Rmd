@@ -1,0 +1,78 @@
+---
+title: "Rescue Ephys Data Analysis"
+author: "Lindsay Hayes"
+output:
+  html_document: 
+    keep_md: yes
+editor_options: 
+  chunk_output_type: console
+---
+This is an rmarkdown of the ephys data from **CON:CON**, **CON:PLX**, **MIA:CON**, and **MIA:PLX** mice treated with 10 mg/kg PIC at E9 and PLX from E9-E12. Recordings were performed on D1TdTom- or Drd2-Cre; RCE+ cells in the ventral striatum.
+
+### Set-Up Data and Subset
+```{r, echo=FALSE, message=FALSE, error=FALSE}
+library(tidyverse)
+library(ggplot2)
+library(cowplot)
+library(rstatix)
+library(multcomp)
+options(digits=4)
+
+data <- read.csv("201109_rescue_mEPSC.csv", stringsAsFactors = T)
+data$Cell <- as.character(data$Cell)
+str(data)
+data %>% count(data$Group)
+data %>% count(data$Group, data$ID)
+```
+
+### Plot mEPSC Frequency and Amplitude
+```{r, fig.height=4, fig.width=7, message=FALSE, echo=FALSE, warning=FALSE}
+a=ggplot(data, aes(x=Group, y=mAmp, fill=Group)) + geom_boxplot() + geom_point(size=2,color="black", position=position_dodge(width=0.9)) + labs(y="mEPSC Amplitude") + scale_fill_manual(values=c("grey","turquoise3","red","purple3")) + theme_cowplot() + theme(legend.position = "none") + theme(axis.text.x = element_text(angle = 90))
+
+b=ggplot(data, aes(x=Group, y=mFreq, fill=Group)) + geom_boxplot() + geom_point(size=2,color="black", position=position_dodge(width=0.9)) + labs(y="mEPSC Frequency") + scale_fill_manual(values=c("grey","turquoise3","red","purple3")) + theme_cowplot() + theme(legend.position = "none") + theme(axis.text.x = element_text(angle = 90))
+
+plot_grid(a,b)
+```
+
+### Statistics for Frequency and Amplitude
+```{r, message=FALSE}
+library(lme4)
+library(lmerTest)
+
+data %>% group_by(Group) %>% shapiro_test(mFreq)
+data %>% group_by(Group) %>% shapiro_test(mAmp)
+
+bartlett.test(data$mFreq ~ data$Group) # unequal variance
+bartlett.test(data$mAmp ~ data$Group) # equal variance
+
+lme.fit <- lmer(mFreq~Group+(1|ID),data=data)
+summary(lme.fit)
+summary(glht(lme.fit, linfct = mcp(Group = c("CON:PLX - CON:CON == 0", "MIA:CON - CON:CON == 0", "MIA:PLX - CON:CON == 0", "MIA:PLX - MIA:CON == 0")), test = adjusted("BH")))
+
+lme.fit <- lmer(mAmp~Group+(1|ID),data=data)
+summary(lme.fit)
+summary(glht(lme.fit, linfct = mcp(Group = c("CON:PLX - CON:CON == 0", "MIA:CON - CON:CON == 0", "MIA:PLX - CON:CON == 0", "MIA:PLX - MIA:CON == 0")), test = adjusted("BH")))
+
+```
+
+### Statistics for cumulative probability for mEPSC Frequency
+```{r fig.height=4, fig.width=10, warning=F}
+cumlFreq <- read.csv("2110816_rescue_mEPSC_cumprob.csv", stringsAsFactors = T)
+cumlFreq_v1 <- filter(cumlFreq, Group %in% c("CON.CON", "MIA.CON"))
+
+cumlFreq<- filter(cumlFreq, IEI <= 4)
+a=ggplot(cumlFreq, aes(x=IEI, y=probability, group=Group, color=Group)) + scale_color_manual(values=c("black","turquoise3", "red", "purple3")) + geom_smooth(method = lm, formula = y ~ splines::bs(x, 10)) + labs(y="cumulative probability", subtitle="D2R Frequency") + xlim(0,2) + theme_cowplot()
+
+b=ggplot(cumlFreq_v1, aes(x=IEI, y=probability, group=Group, color=Group)) + scale_color_manual(values=c("black", "red")) + geom_smooth(method = lm, formula = y ~ splines::bs(x, 10)) + labs(y="cumulative probability", subtitle="D2R Frequency")  + xlim(0,2) + theme_cowplot()
+plot_grid(a,b)
+
+ks.test(cumlFreq[cumlFreq$Group=="CON.CON",]$probability,cumlFreq[cumlFreq$Group=="CON.PLX",]$probability)
+
+ks.test(cumlFreq[cumlFreq$Group=="CON.CON",]$probability,cumlFreq[cumlFreq$Group=="MIA.CON",]$probability)
+
+ks.test(cumlFreq[cumlFreq$Group=="CON.CON",]$probability,cumlFreq[cumlFreq$Group=="MIA.PLX",]$probability)
+```
+
+```{r}
+sessionInfo()
+```

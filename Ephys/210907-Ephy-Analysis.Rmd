@@ -1,0 +1,171 @@
+---
+output:
+  html_document: 
+    df_print: default
+    highlight: haddock
+    keep_md: yes
+    theme: paper
+editor_options: 
+  chunk_output_type: console
+---
+# MSN electrophysiology data analysis
+Analysis of the ephys data from **CON** and **MIA** mice treated with PIC at E9. Recordings were performed on D1TdTom+ (D1R) and D1TdTom- (D2R) MSNs in the ventral striatum.
+
+```{r, echo=FALSE, message=FALSE}
+options(digits=3)
+library(ggplot2)
+library(cowplot)
+library(tidyverse)
+library(rstatix)
+```
+
+
+# Paired Pulse Ratio
+```{r, warning=FALSE,echo=FALSE, message=FALSE, fig.width=8, fig.height=3}
+rm(list = ls())
+ppr=read_csv("data/PPR_v2.csv")
+PPR = gather(ppr,ms,ppr,`400`,`200`,`100`,`50`,`20`)
+PPR$ms = as.numeric(PPR$ms)
+
+D1R = PPR %>% filter(Type=="D1R")
+D2R = PPR %>% filter(Type=="D2R")
+
+a=ggplot(D1R, aes(x=ms, y=ppr, group=Group, color=Group)) + geom_line(stat="summary",fun.y="mean", size=1) + geom_point(stat="summary",fun.y="mean", size=2) + stat_summary(fun.data=mean_se, geom="errorbar", width=0.1) + scale_color_manual(values=c("black","red")) + labs(title="Tom+ MSN", y="Paired Pulse Ratio") + theme(legend.position="none") + theme_cowplot() + coord_cartesian(ylim=c(0.75,1.75))
+
+b=ggplot(D2R, aes(x=ms, y=ppr, group=Group, color=Group)) + geom_line(stat="summary",fun.y="mean", size=1) + geom_point(stat="summary",fun.y="mean", size=2) + stat_summary(fun.data=mean_se, geom="errorbar", width=0.1) + scale_color_manual(values=c("black","red")) + labs(title="Tom- MSN", y="Paired Pulse Ratio") + theme(legend.position="none") + theme_cowplot() + coord_cartesian(ylim=c(0.75,1.75))
+
+plot_grid(a,b)
+```
+
+### Repeated measures two-way ANOVA
+```{r, message=TRUE, echo=T}
+PPR %>% filter(ms == "400") %>% group_by(Type, Group) %>% summarise(cells = n(), mouse = length(unique(ID)), litter = length(unique(Litter)))
+
+message("Tom+ (D1R)")
+anova(lm(ppr~Group*ms+ID, data = D1R))
+
+message("Tom- (D2R)")
+anova(lm(ppr~Group*ms+ID, data = D2R))
+```
+
+# sEPSC Frequency and Amplitude
+```{r, warning=FALSE, echo=FALSE, fig.width=8, fig.height = 5, message=F}
+rm(list = ls())
+data=read.csv("data/sEPSC.csv")
+D1R<-subset(data, data$Type=="D1R")
+D2R<-subset(data, data$Type=="D2R")
+
+a=ggplot(data, aes(x=Type, y=sFreq, fill=Group)) + geom_bar(stat="summary",fun.y="mean", position="dodge", aes(fill=Group)) + stat_summary(fun.data=mean_se, geom="errorbar", width=0.25, position=position_dodge(width=0.9), color=c("black","red","black","red")) + scale_fill_manual(values=c("black","red","black","red")) + geom_point(size=2,color="grey50", position=position_dodge(width=0.9)) + labs(y="sEPSC Frequency") + theme_cowplot() + theme(legend.position = "none")
+
+b=ggplot(data, aes(x=Type, y=sAmp, fill=Group)) + geom_bar(stat="summary",fun.y="mean", position="dodge", aes(fill=Group)) + stat_summary(fun.data=mean_se, geom="errorbar", width=0.25, position=position_dodge(width=0.9), color=c("black","red","black","red")) + scale_fill_manual(values=c("black","red","black","red")) + geom_point(size=2,color="grey50", position=position_dodge(width=0.9)) + labs(y="sEPSC Amplitude") + theme_cowplot() + theme(legend.position = "none")
+
+c= ggplot(data, aes(x=Type, y=sFreq, fill=Group)) + geom_boxplot() + scale_fill_manual(values=c("grey","red","grey","red")) + geom_point(size=2,color="black", position=position_dodge(width=0.75)) + labs(y="sEPSC Frequency") + theme_cowplot() + ylim(0,6)  + theme(legend.position = "none")
+plot_grid(a,b,c)
+```
+
+## T-test
+```{r}
+data %>% group_by(Type, Group) %>% summarise(cells = n(), mouse = length(unique(ID)), litter = length(unique(Litter)))
+
+message("Analysis of sEPSC Frequency")
+table(D1R$Group, dnn = "Number of D1R Cells")
+table(D2R$Group, dnn = "Number of D2R Cells")
+data %>% group_by(Type, Group) %>% shapiro_test(sFreq)
+t.test(D1R$sFreq ~ D1R$Group)
+t.test(D2R$sFreq ~ D2R$Group)
+
+message("Analysis of sEPSC Amplitude")
+data %>% group_by(Type, Group) %>% shapiro_test(sAmp)
+t.test(D1R$sAmp ~ D1R$Group)
+t.test(D2R$sAmp ~ D2R$Group)
+```
+
+## KS Test of Cumulative Distrubtion
+```{r, echo=F}
+cumlFreq=read.csv("data/sEPSC-Freq.csv")
+cumlAmp=read.csv("data/sEPSC-Amp.csv")
+
+a=ggplot(cumlFreq[cumlFreq$Cell=="D1R",], aes(x=IEI, y=probability, group=Group, color=Group)) + geom_point(size=1) + scale_color_manual(values=c("black","red")) + geom_smooth(method = lm, formula = y ~ splines::bs(x, 10)) + labs(y="cumulative probability", subtitle="D1R Frequency") 
+
+b=ggplot(cumlFreq[cumlFreq$Cell=="D2R",], aes(x=IEI, y=probability, group=Group, color=Group)) + geom_point(size=1) + scale_color_manual(values=c("black","red")) + geom_smooth(method = lm, formula = y ~ splines::bs(x, 10)) + labs(y="cumulative probability", subtitle="D2R Frequency") 
+
+c=ggplot(cumlAmp[cumlAmp$Cell=="D1R",], aes(x=amplitude.pA, y=probability, group=Group, color=Group)) + geom_point(size=1) + scale_color_manual(values=c("black","red")) + geom_smooth(method = lm, formula = y ~ splines::bs(x, 8)) + labs(y="cumulative probability", subtitle="D1R Amplitude") 
+
+d=ggplot(cumlAmp[cumlAmp$Cell=="D2R",], aes(x=amplitude.pA, y=probability, group=Group, color=Group)) + geom_point(size=1) + scale_color_manual(values=c("black","red")) + geom_smooth(method = lm, formula = y ~ splines::bs(x, 8)) + labs(y="cumulative probability", subtitle="D2R Amplitude") 
+
+plot_grid(a,b,c,d)
+
+D1R=cumlFreq[cumlFreq$Cell=="D1R",]
+D2R=cumlFreq[cumlFreq$Cell=="D2R",]
+```
+```{r}
+message("KS Test comparing the control and MIA D1R sEPSC frequency distribution")
+ks.test(D1R[D1R$Group=="CON",]$probability,D1R[D1R$Group=="MIA",]$probability)
+
+message("KS Test comparing the control and MIA D2R sEPSC frequency distribution")
+ks.test(D2R[D2R$Group=="CON",]$probability,D2R[D2R$Group=="MIA",]$probability)
+
+D1R=cumlAmp[cumlAmp$Cell=="D1R",]
+D2R=cumlAmp[cumlAmp$Cell=="D2R",]
+
+message("KS Test comparing the control and MIA D1R sEPSC amplitude distribution")
+ks.test(D1R[D1R$Group=="CON",]$probability,D1R[D1R$Group=="MIA",]$probability)
+
+message("KS Test comparing the control and MIA D2R sEPSC amplitude distribution")
+ks.test(D2R[D2R$Group=="CON",]$probability, D2R[D2R$Group=="MIA",]$probability)
+
+rm(list = ls())
+```
+
+# mESPC Frequency and Amplitude
+```{r, echo=FALSE, fig.width=8, warning=F, message=F}
+rm(list = ls())
+data=read.csv("data/mEPSC.csv")
+
+a=ggplot(data, aes(x=Type, y=mFreq, fill=Group)) + geom_bar(stat="summary",fun.y="mean", position="dodge", aes(fill=Group)) + stat_summary(fun.data=mean_se, geom="errorbar", width=0.25, position=position_dodge(width=0.9), color=c("black","red")) + scale_fill_manual(values=c("black","red")) + geom_point(size=2,color="grey50", position=position_dodge(width=0.9)) + labs(y="sEPSC Frequency") + theme_cowplot()
+
+b=ggplot(data, aes(x=Type, y=mAmp, fill=Group)) + geom_bar(stat="summary",fun.y="mean", position="dodge", aes(fill=Group)) + stat_summary(fun.data=mean_se, geom="errorbar", width=0.25, position=position_dodge(width=0.9), color=c("black","red")) + scale_fill_manual(values=c("black","red")) + geom_point(size=2,color="grey50", position=position_dodge(width=0.9)) + labs(y="sEPSC Amplitude") + theme_cowplot()
+
+c=ggplot(data, aes(x=Type, y=mFreq, fill=Group)) + geom_boxplot() + scale_fill_manual(values=c("grey","red","grey","red")) + geom_point(size=2,color="black", position=position_dodge(width=0.75)) + labs(y="mEPSC Frequency") + theme_cowplot() + ylim(0,6)
+plot_grid(a,b,c)
+```
+
+## T-test
+```{r}
+data %>% group_by(Type, Group) %>% summarise(cells = n(), mouse = length(unique(ID)))
+
+message("Analysis of mEPSC Frequency")
+table(data$Group, dnn = "Number of D2R Cells")
+data %>% group_by(Group) %>% shapiro_test(mFreq)
+t.test(data$mFreq ~ data$Group)
+
+message("Analysis of mEPSC Amplitude")
+data %>% group_by(Group) %>% shapiro_test(mAmp)
+t.test(data$mAmp ~ data$Group)
+
+```
+
+## KS Test
+```{r, echo=F, fig.width=8, fig.height=3}
+cumlFreq=read.csv("data/mEPSC-Freq.csv")
+cumlAmp=read.csv("data/mEPSC-Amp.csv")
+
+a=ggplot(cumlFreq, aes(x=IEI, y=probability, group=Group, color=Group)) + geom_point(size=1) + scale_color_manual(values=c("black","red")) + geom_smooth(method = lm, formula = y ~ splines::bs(x, 10)) + labs(y="cumulative probability", subtitle="D2R Frequency") 
+
+b=ggplot(cumlAmp, aes(x=amplitude.pA, y=probability, group=Group, color=Group)) + geom_point(size=1) + scale_color_manual(values=c("black","red")) + geom_smooth(method = lm, formula = y ~ splines::bs(x, 8)) + labs(y="cumulative probability", subtitle="D2R Amplitude") 
+
+plot_grid(a,b)
+```
+```{r}
+message("KS Test comparing the control and MIA D2R mEPSC frequency distribution")
+ks.test(cumlFreq[cumlFreq$Group=="CON",]$probability,cumlFreq[cumlFreq$Group=="MIA",]$probability)
+
+message("KS Test comparing the control and MIA D2R mEPSC amplitude distribution")
+ks.test(cumlAmp[cumlAmp$Group=="CON",]$probability,cumlAmp[cumlAmp$Group=="MIA",]$probability)
+rm(list = ls())
+```
+
+
+```{r}
+sessionInfo()
+```
