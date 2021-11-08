@@ -1,0 +1,116 @@
+---
+output:
+  html_document: 
+    df_print: default
+    highlight: haddock
+    keep_md: yes
+    theme: paper
+editor_options: 
+  chunk_output_type: console
+---
+# **Protein** for IL-1b, IL6, and TNFa of microglia, astrocytes and uncaptured cells from frontal cortex and striatum.
+Data analysis of *protein expression* of for IL-1b, IL-6 and TNFa after treatment 4500 EU/g lipopolysaccharide (LPS) for 18 hours. pg/mL of protein was normalized with total protein. 
+
+## Samples
+```{r, message=FALSE, echo=FALSE}
+library(ggplot2)
+library(cowplot)
+library(lme4)
+library(lmerTest)
+library(multcomp)
+library(car)
+library(tidyverse)
+library(rstatix)
+library(ggpubr)
+```
+```{r,}
+dat <- read.csv("210209_MSD_v2.csv", header = TRUE, stringsAsFactors = TRUE)
+# remove id 20-38 & 20-34 because all data points are below standard
+```
+### Sample Size
+```{r}
+dat %>% filter((analyte == "IL-6")) %>% filter(cell == "astrocyte") %>% group_by(cell, group, region) %>% summarise(n = n())
+dat %>% filter((analyte == "IL-6")) %>% filter(cell == "microglia") %>% group_by(cell, group, region) %>% summarise(n = n())
+dat %>% filter((analyte == "IL-6")) %>% filter(cell == "negative") %>% group_by(cell, group, region) %>% summarise(n = n())
+
+dat %>% filter((analyte == "IL-1b")) %>% filter(cell == "microglia") %>% group_by(cell, group, region) %>% summarise(n = n())
+dat %>% filter((analyte == "TNFa")) %>% filter(cell == "microglia") %>% group_by(cell, group, region) %>% summarise(n = n())
+```
+
+```{r}
+dat %>% filter(analyte == "IL-6") %>% 
+  ggplot(.,aes(x=region, y=norm.tot, fill = group)) + geom_boxplot() + facet_wrap(~ cell) + scale_fill_manual(values = c("grey", "turquoise3", "red", "mediumpurple3")) + geom_point(position = position_dodge(width = 0.75)) + ylab("IL-6 pg/mL")
+
+dat %>% filter(analyte == "IL-1b") %>% 
+  ggplot(.,aes(x=region, y=log2(norm.tot), fill = group)) + geom_boxplot() + facet_wrap(~ cell) + scale_fill_manual(values = c("grey", "turquoise3", "red", "mediumpurple3")) + geom_point(position = position_dodge(width = 0.75)) + ylab("IL-1b pg/mL")
+
+dat %>% filter(analyte == "TNFa") %>% 
+  ggplot(.,aes(x=region, y=norm.tot, fill = group)) + geom_boxplot() + facet_wrap(~ cell) + scale_fill_manual(values = c("grey", "turquoise3", "red", "mediumpurple3")) + geom_point(position = position_dodge(width = 0.75)) + ylab("TNFa pg/mL")
+```
+
+
+# 2-way ANOVA (type 2)
+### Microglia
+### TNFa
+```{r}
+TNFa.MG <- dat %>% filter(analyte=="TNFa" & cell=="microglia")
+
+TNFa.MG %>% group_by(group, region) %>% shapiro_test(norm.tot)
+TNFa.MG %>% levene_test(norm.tot ~ group*region)
+aov.out<-lm(norm.tot ~ group + region, data = TNFa.MG)
+Anova(aov.out)
+summary(glht(aov.out, linfct = mcp(group = "Tukey"), test = adjusted("BH")))
+```
+
+### IL6
+```{r}
+IL6.MG <- dat %>% filter(analyte=="IL-6" & cell=="microglia")
+
+IL6.MG %>% group_by(group, region) %>% shapiro_test(norm.tot)
+IL6.MG %>% levene_test(norm.tot ~ group*region)
+aov.out<-lm(norm.tot ~ group + region, data = IL6.MG)
+Anova(aov.out)
+summary(glht(aov.out, linfct = mcp(group = "Tukey"), test = adjusted("BH")))
+```
+
+### IL1b
+```{r}
+IL1b.MG <- dat %>% filter(analyte=="IL-1b" & cell=="microglia")
+
+IL1b.MG %>% group_by(group, region) %>% shapiro_test(norm.tot)
+IL1b.MG %>% levene_test(norm.tot ~ group*region)
+aov.out<-lm(norm.tot ~ group + region, data = IL1b.MG)
+Anova(aov.out)
+summary(glht(aov.out, linfct = mcp(group = "Tukey"), test = adjusted("BH")))
+```
+
+### Astrocyte
+### IL6
+```{r}
+IL6.A <- dat %>% filter(analyte=="IL-6" & cell=="astrocyte")
+IL6.A %>% group_by(group, region) %>% shapiro_test(norm.tot)
+IL6.A %>% levene_test(norm.tot ~ group*region)
+aov.out<-lm(norm.tot ~ group + region, data = IL6.A)
+Anova(aov.out)
+summary(glht(aov.out, linfct = mcp(group = "Dunnett"), test = adjusted("BH")))
+```
+
+### Negative
+### IL6
+```{r}
+IL6.N <- dat %>% filter(analyte=="IL-6" & cell=="negative")
+
+IL6.N %>% group_by(region, group) %>% shapiro_test(norm.tot)
+IL6.N %>% levene_test(norm.tot ~ group*region)
+aov.out<-lm(norm.tot ~ group + region, data = IL6.N)
+Anova(aov.out)
+summary(glht(aov.out, linfct = mcp(group = "Dunnett"), test = adjusted("BH")))
+```
+
+
+
+### Reproducibility info
+```{r, echo=FALSE}
+Sys.time()
+devtools::session_info()
+```
