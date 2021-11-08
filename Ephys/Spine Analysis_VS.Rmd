@@ -1,0 +1,51 @@
+---
+output:
+  html_document: 
+    df_print: default
+    highlight: haddock
+    keep_md: yes
+    theme: paper
+---
+# Extended Data Figure: Spine Density
+Analysis of spine density of medium spiny neurons in the ventral striatum from adult CON and MIA mice.
+
+## Load and subset data
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+options(digits=3)
+library(readr)
+library(tidyverse)
+library(ggplot2)
+library(cowplot)
+library(ggplot2)
+library(cowplot)
+
+data = read_csv("160503.spines.csv")
+data2 = aggregate(data, by=list(data$Mouse, data$Group, data$Region), FUN=mean, na.rm=TRUE)
+data2[,4:7]=NULL
+colnames(data2)=c("Mouse","Group","Region","density")
+data2 = data2 %>% filter(Region=="vs")
+table(data2$Group)
+```
+
+## Plot data
+```{r, echo=FALSE, fig.width=3, fig.height=3, warning=FALSE, message=FALSE}
+ggplot(data2, aes(x=Region, y=density, fill=Group)) + geom_bar(stat="summary", fun.y="mean",position="dodge", aes(fill=Group)) + stat_summary(fun.data=mean_se, geom="errorbar", width=0.15, position=position_dodge(width=0.9), color=c("black","red")) + scale_fill_manual(values=c("black","red")) + geom_point(size=2, position=position_dodge(width=0.9), color="grey50") + theme_cowplot()
+```
+
+## Perform t-test between control and MIA
+```{r, echo=FALSE}
+a=shapiro.test(data2[data2$Group=="CON",]$density)$p.value
+b=shapiro.test(data2[data2$Group=="MIA",]$density)$p.value
+wa = rbind(a,b)
+rownames(wa) = c("Con Normality", "MIA Normality")
+round(wa,3)
+message("Data is normal, use t-test")
+t.test(data2$density ~ data2$Group)
+```
+## Conclusion - Ventral striatum MSNs have a normal spine density.
+
+### Reproducibility info
+```{r, echo=FALSE}
+Sys.time()
+devtools::session_info()
+```
