@@ -81,7 +81,7 @@ t.test(D2R$sAmp ~ D2R$Group)
 ```
 
 ## KS Test of Cumulative Distrubtion
-```{r, echo=F}
+```{r, echo=F, fig.height=3}
 cumlFreq=read.csv("data/sEPSC-Freq.csv")
 cumlAmp=read.csv("data/sEPSC-Amp.csv")
 
@@ -89,11 +89,7 @@ a=ggplot(cumlFreq[cumlFreq$Cell=="D1R",], aes(x=IEI, y=probability, group=Group,
 
 b=ggplot(cumlFreq[cumlFreq$Cell=="D2R",], aes(x=IEI, y=probability, group=Group, color=Group)) + geom_point(size=1) + scale_color_manual(values=c("black","red")) + geom_smooth(method = lm, formula = y ~ splines::bs(x, 10)) + labs(y="cumulative probability", subtitle="D2R Frequency") 
 
-c=ggplot(cumlAmp[cumlAmp$Cell=="D1R",], aes(x=amplitude.pA, y=probability, group=Group, color=Group)) + geom_point(size=1) + scale_color_manual(values=c("black","red")) + geom_smooth(method = lm, formula = y ~ splines::bs(x, 8)) + labs(y="cumulative probability", subtitle="D1R Amplitude") 
-
-d=ggplot(cumlAmp[cumlAmp$Cell=="D2R",], aes(x=amplitude.pA, y=probability, group=Group, color=Group)) + geom_point(size=1) + scale_color_manual(values=c("black","red")) + geom_smooth(method = lm, formula = y ~ splines::bs(x, 8)) + labs(y="cumulative probability", subtitle="D2R Amplitude") 
-
-plot_grid(a,b,c,d)
+plot_grid(a,b)
 
 D1R=cumlFreq[cumlFreq$Cell=="D1R",]
 D2R=cumlFreq[cumlFreq$Cell=="D2R",]
@@ -104,15 +100,6 @@ ks.test(D1R[D1R$Group=="CON",]$probability,D1R[D1R$Group=="MIA",]$probability)
 
 message("KS Test comparing the control and MIA D2R sEPSC frequency distribution")
 ks.test(D2R[D2R$Group=="CON",]$probability,D2R[D2R$Group=="MIA",]$probability)
-
-D1R=cumlAmp[cumlAmp$Cell=="D1R",]
-D2R=cumlAmp[cumlAmp$Cell=="D2R",]
-
-message("KS Test comparing the control and MIA D1R sEPSC amplitude distribution")
-ks.test(D1R[D1R$Group=="CON",]$probability,D1R[D1R$Group=="MIA",]$probability)
-
-message("KS Test comparing the control and MIA D2R sEPSC amplitude distribution")
-ks.test(D2R[D2R$Group=="CON",]$probability, D2R[D2R$Group=="MIA",]$probability)
 
 rm(list = ls())
 ```
@@ -146,22 +133,16 @@ t.test(data$mAmp ~ data$Group)
 ```
 
 ## KS Test
-```{r, echo=F, fig.width=8, fig.height=3}
+```{r, echo=F, fig.width=4, fig.height=3}
 cumlFreq=read.csv("data/mEPSC-Freq.csv")
 cumlAmp=read.csv("data/mEPSC-Amp.csv")
 
 a=ggplot(cumlFreq, aes(x=IEI, y=probability, group=Group, color=Group)) + geom_point(size=1) + scale_color_manual(values=c("black","red")) + geom_smooth(method = lm, formula = y ~ splines::bs(x, 10)) + labs(y="cumulative probability", subtitle="D2R Frequency") 
 
-b=ggplot(cumlAmp, aes(x=amplitude.pA, y=probability, group=Group, color=Group)) + geom_point(size=1) + scale_color_manual(values=c("black","red")) + geom_smooth(method = lm, formula = y ~ splines::bs(x, 8)) + labs(y="cumulative probability", subtitle="D2R Amplitude") 
-
-plot_grid(a,b)
 ```
 ```{r}
 message("KS Test comparing the control and MIA D2R mEPSC frequency distribution")
 ks.test(cumlFreq[cumlFreq$Group=="CON",]$probability,cumlFreq[cumlFreq$Group=="MIA",]$probability)
-
-message("KS Test comparing the control and MIA D2R mEPSC amplitude distribution")
-ks.test(cumlAmp[cumlAmp$Group=="CON",]$probability,cumlAmp[cumlAmp$Group=="MIA",]$probability)
 rm(list = ls())
 ```
 
