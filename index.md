@@ -1,6 +1,14 @@
 ## Welcome to the GitHub Page for the manuscript: Hayes et al. 2022
 
-### Data Analysis included in the manuscript
+### **Data Analyses**
+
+Serum IL-6 after LPS: 
+[html]( https://lindsaynhayes.github.io/Hayes_2021/Serum/1g_LPS_Serum.html  )  |  [script](https://github.com/lindsaynhayes/Hayes_2021/blob/gh-pages/Serum/1g_LPS_Serum.Rmd)
+
+
+FACS quantification of MG ablation: 
+[html]( https://lindsaynhayes.github.io/Hayes_2021/FACS/Fig_ED7e.html )  |  [script](https://github.com/lindsaynhayes/Hayes_2021/blob/gh-pages/FACS/Fig_ED7e.Rmd)
+
 
 RNA sequencing analysis of microglia in Fig 1 & Ext Data Fig 1-3:
  [MACS-MG Adult LPS Response]( https://lindsaynhayes.github.io/Hayes_2021/Bulk_RNAseq_MACS/DESeq2_MACS_Adult_Bulk_publication.html ) | 
