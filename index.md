@@ -53,13 +53,15 @@ Rescue of Microglia Blunting with Prenatal Microglia Replacement:
 Validation of the rescue of microglia bluting using protein expression Fig 4-5:
  [Protein Rescue]( https://lindsaynhayes.github.io/Hayes_2021/Protein/MSD_Cells_Rescue_Stats.html)
 
-MSN Electrophysiology Fig. 5, Ext Data 8
- [1]( https://lindsaynhayes.github.io/Hayes_2021/Ephys/210905-Ephy-Analysis.html)   |
- [2]( https://lindsaynhayes.github.io/Hayes_2021/Ephys/210907-Ephy-Analysis.html)   |
+MSN Electrophysiology Fig. 5, Ext Data 8:
+ [MIA MSN phenotype]( https://lindsaynhayes.github.io/Hayes_2021/Ephys/210907-Ephy-Analysis.html)   |
+ [Rescue of MSN]( https://lindsaynhayes.github.io/Hayes_2021/Ephys/210905-Ephy-Analysis.html)   |
  [spine analysis]( https://lindsaynhayes.github.io/Hayes_2021/Ephys/Spine-Analysis_VS.html)
 
+No Effect of Sex by qPCR Ext Data Fig 9:
+[TEXT]( https://lindsaynhayes.github.io/Hayes_2021/qPCR/QPCR-C8-26_pub.html)
 
-[TEXT]( https://lindsaynhayes.github.io/Hayes_2021/x/y)
+
 [TEXT]( https://lindsaynhayes.github.io/Hayes_2021/x/y)
 [TEXT]( https://lindsaynhayes.github.io/Hayes_2021/x/y)
  
