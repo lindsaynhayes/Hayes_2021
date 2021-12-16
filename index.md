@@ -34,14 +34,14 @@ Disease enrichment of DEGs Fig 2g:
 [multiple comparison correction]( https://lindsaynhayes.github.io/Hayes_2021/Disease_Enrichment/P_correct.nb.html)
 
 ATAC Sequencing in Fig 3:
-[ATAC]( https://lindsaynhayes.github.io/Hayes_2021/ATAC/210329_ATAC_v3_MvCinLPS_pub.html )
+[ATAC]( https://lindsaynhayes.github.io/Hayes_2021/ATAC/210329_ATAC_v3_MvCinLPS_pub.html ) | 
 [Validation by Gene Expression]( https://lindsaynhayes.github.io/Hayes_2021/Bulk_RNAseq_FACS/QuickPlot_Pub.html)
 
 Rescue of Microglia Blunting with Prenatal Microglia Replacement:
-[Prenatal Microglia Ablation and Replacement]( https://lindsaynhayes.github.io/Hayes_2021/FACS/Fig_ED7e.html)
-[3 Hour Maternal Serum]( https://lindsaynhayes.github.io/Hayes_2021/Serum/Maternal_Serum.html)
-[Amelioration of Microglia Blunting]( https://lindsaynhayes.github.io/Hayes_2021/Bulk_RNAseq_Rescue_FACS/FACS_Rescue_LPS_pub.html)
-[Ext Data Fig. 7: Rescue PCA]( https://lindsaynhayes.github.io/Hayes_2021/Bulk_RNAseq_Rescue_FACS/PCA_Clust.html)
+[Prenatal Microglia Ablation and Replacement]( https://lindsaynhayes.github.io/Hayes_2021/FACS/Fig_ED7e.html) | 
+[3 Hour Maternal Serum]( https://lindsaynhayes.github.io/Hayes_2021/Serum/Maternal_Serum.html) | 
+[Amelioration of Microglia Blunting]( https://lindsaynhayes.github.io/Hayes_2021/Bulk_RNAseq_Rescue_FACS/FACS_Rescue_LPS_pub.html) | 
+[Ext Data Fig. 7: Rescue PCA]( https://lindsaynhayes.github.io/Hayes_2021/Bulk_RNAseq_Rescue_FACS/PCA_Clust.html) | 
 [Ext Data Fig. 7: Rescue volcanos]( https://lindsaynhayes.github.io/Hayes_2021/Bulk_RNAseq_Rescue_FACS/Volcano.html)
 
 Validation of the rescue of microglia bluting using protein expression Fig 4-5:
