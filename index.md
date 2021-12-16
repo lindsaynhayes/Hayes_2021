@@ -3,7 +3,7 @@
 
 RNA sequencing analysis of microglia in Fig 1 & Ext Data Fig 1-3:
 * [MACS-MG Adult LPS Response]( https://lindsaynhayes.github.io/Hayes_2021/Bulk_RNAseq_MACS/DESeq2_MACS_Adult_Bulk_publication.html )
-* [FACS-MG Blunting](https://lindsaynhayes.github.io/Hayes_2021/Bulk_RNAseq_FACS/210301_Deseq2_FACS_filt_NOsva_ED3e.html)
+* [FACS-MG Blunting]( https://lindsaynhayes.github.io/Hayes_2021/Bulk_RNAseq_FACS/210301_Deseq2_FACS_filt_NOsva_ED3e.html )
 * [Cell Type Heatmap_MACS]( https://lindsaynhayes.github.io/Hayes_2021/Bulk_RNAseq_MACS/DESeq2_MACS_Adult_Bulk_Heatmap.html )
 * [Volcanos]( https://lindsaynhayes.github.io/Hayes_2021/Bulk_RNAseq_MACS/DESeq2_MACS_Adult_Bulk_Volcano.html )
 * [Cell Type Heatmap_FACS]( https://lindsaynhayes.github.io/Hayes_2021/Bulk_RNAseq_FACS/DESeq2_FACS_Bulk_Heatmap.html )
