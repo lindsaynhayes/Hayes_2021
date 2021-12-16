@@ -23,7 +23,7 @@ Microglia In Vitro Activation in Fig 2 and Ext Data Fig 9:
  [In Vitro]( https://lindsaynhayes.github.io/Hayes_2021/InVitro/210903_invitro.html )
 
 RNA sequencing of neonatal microglia in Fig 2:
- [P4 MG]( https://lindsaynhayes.github.io/Hayes_2021/Serum/DESeq2_MACS_P4_Bulk_pub.html)
+ [P4 MG]( https://lindsaynhayes.github.io/Hayes_2021/Bulk_RNAseq_P4/DESeq2_MACS_P4_Bulk_pub.html)
 
 Disease enrichment of DEGs Fig 2g: 
 [ADHD]( https://lindsaynhayes.github.io/Hayes_2021/Disease_Enrichment/ADHD.html )  |
