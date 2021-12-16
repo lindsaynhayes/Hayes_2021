@@ -59,7 +59,7 @@ MSN Electrophysiology Fig. 5, Ext Data 8:
  [spine analysis]( https://lindsaynhayes.github.io/Hayes_2021/Ephys/Spine-Analysis_VS.html)
 
 No Effect of Sex by qPCR Ext Data Fig 9:
-[TEXT]( https://lindsaynhayes.github.io/Hayes_2021/qPCR/QPCR-C8-26_pub.html)
+[qPCR]( https://lindsaynhayes.github.io/Hayes_2021/qPCR/QPCR-C8-26_pub.html)
 
 
 [TEXT]( https://lindsaynhayes.github.io/Hayes_2021/x/y)
