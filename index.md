@@ -2,25 +2,28 @@
 
 ### Data Analysis included in the manuscript
 
-[RNA sequencing of microglia in Fig 1 and Ext Data Fig 2]( https://lindsaynhayes.github.io/Hayes_2021/Bulk_RNAseq_MACS/DESeq2_MACS_Adult_Bulk_publication.html )
+RNA sequencing analysis of microglia in Fig 1 & Ext Data Fig 1-3:
+ [MACS-MG Adult LPS Response]( https://lindsaynhayes.github.io/Hayes_2021/Bulk_RNAseq_MACS/DESeq2_MACS_Adult_Bulk_publication.html ) | 
+ [Cell Type Heatmap_MACS]( https://lindsaynhayes.github.io/Hayes_2021/Bulk_RNAseq_MACS/DESeq2_MACS_Adult_Bulk_Heatmap.html )  |
+ [Volcanos]( https://lindsaynhayes.github.io/Hayes_2021/Bulk_RNAseq_MACS/DESeq2_MACS_Adult_Bulk_Volcano.html ). |
+ [Cell Type Heatmap_FACS]( https://lindsaynhayes.github.io/Hayes_2021/Bulk_RNAseq_FACS/DESeq2_FACS_Bulk_Heatmap.html )
 
-[Ext Data Fig 1 Heatmap]( https://lindsaynhayes.github.io/Hayes_2021/Bulk_RNAseq_MACS/DESeq2_MACS_Adult_Bulk_Heatmap.html )
+MIA IL-6 serum resonse to LPS:
+ [IL-6]( https://lindsaynhayes.github.io/Hayes_2021/Serum/1g_LPS_Serum.html )
 
-[Ext Data Fig 1 Volcanos]( https://lindsaynhayes.github.io/Hayes_2021/Bulk_RNAseq_MACS/DESeq2_MACS_Adult_Bulk_Volcano.html )
+MIA microglia morphology in Fig 1 & Ext Data Fig 4:
+[CD68]( https://lindsaynhayes.github.io/Hayes_2021/MG_Morph/MG_CD68_pub.html ) |
+[Sholl]( https://lindsaynhayes.github.io/Hayes_2021/Serum/MG_Sholl.html ). |
+[Density]( https://lindsaynhayes.github.io/Hayes_2021/Serum/MG_Density_pub.html )
 
-[Serum IL-6 after LPS]( https://lindsaynhayes.github.io/Hayes_2021/Serum/1g_LPS_Serum.html )
-
-[Microglia Morphology: CD68 Fig 1h & Ext Data 4]( https://lindsaynhayes.github.io/Hayes_2021/MG_Morph/MG_CD68_pub.html )
-
-[Microglia Morphology: Sholl Fig 1i]( https://lindsaynhayes.github.io/Hayes_2021/Serum/MG_Sholl.html )
-
-[Microglia Density: Ext Data 4]( https://lindsaynhayes.github.io/Hayes_2021/Serum/MG_Density_pub.html )
-
+Single Cell RNA sequencing in Fig 1, 4, & Ext Data 5:
 [Single Cell RNA seq]( https://lindsaynhayes.github.io/Hayes_2021/SingleCell/10x_analysis_pub.r )
 
-[Microglia In Vitro: Fig 2a-b & Ext Data 9a-b]( https://lindsaynhayes.github.io/Hayes_2021/InVitro/210903_invitro.html )
+Microglia In Vitro Activation in Fig 2 and Ext Data Fig 9:
+ [In Vitro]( https://lindsaynhayes.github.io/Hayes_2021/InVitro/210903_invitro.html )
 
-[RNA sequencing of neonatal microglia in Fig 2]( https://lindsaynhayes.github.io/Hayes_2021/Serum/DESeq2_MACS_P4_Bulk_pub.html)
+RNA sequencing of neonatal microglia in Fig 2:
+ [P4 MG]( https://lindsaynhayes.github.io/Hayes_2021/Serum/DESeq2_MACS_P4_Bulk_pub.html)
 
 Disease enrichment of DEGs Fig 2: 
 [ADHD]( https://lindsaynhayes.github.io/Hayes_2021/Disease_Enrichment/ADHD.html )  |
@@ -30,14 +33,14 @@ Disease enrichment of DEGs Fig 2:
 [SZ]( https://lindsaynhayes.github.io/Hayes_2021/Disease_Enrichment/SCZ.html )  |
 [multiple comparison correction]( https://lindsaynhayes.github.io/Hayes_2021/Disease_Enrichment/P_correct.nb.html)
 
+ATAC Sequencing in Fig 3:
+[ATAC]( https://lindsaynhayes.github.io/Hayes_2021/ATAC/210329_ATAC_v3_MvCinLPS_pub.html )
 
-[TEXT]( https://lindsaynhayes.github.io/Hayes_2021/Serum/1g_LPS_Serum.html )
+[TEXT]( https://lindsaynhayes.github.io/Hayes_2021/x/y)
 
-[TEXT]( https://lindsaynhayes.github.io/Hayes_2021/Serum/1g_LPS_Serum.html )
+[TEXT]( https://lindsaynhayes.github.io/Hayes_2021/x/y)
 
-[TEXT]( https://lindsaynhayes.github.io/Hayes_2021/Serum/1g_LPS_Serum.html )
-
-[TEXT]( https://lindsaynhayes.github.io/Hayes_2021/Serum/1g_LPS_Serum.html )
+[TEXT]( https://lindsaynhayes.github.io/Hayes_2021/x/y)
 
 
 
