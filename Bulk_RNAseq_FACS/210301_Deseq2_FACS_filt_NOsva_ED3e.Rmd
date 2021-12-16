@@ -18,7 +18,7 @@ library(org.Mm.eg.db)
 library(AnnotationDbi)
 ```
 
-```{r import, message=FALSE, warning=FALSE}
+```{r import, message=FALSE, warning=FALSE, echo=FALSE}
 load("../1.align/txi.rsem.RData")
 metadata <- read.csv("metadata.csv", stringsAsFactors = TRUE)
 metadata$trt <- factor(metadata$trt, levels=c("SAL","LPS", "P4"))
@@ -95,13 +95,11 @@ for (i in c(1:nrow(LPS.Response))){
 }
 table(LPS.Response$Group)
 LPS.Response.final<-subset(LPS.Response, LPS.Response$Group != 4)
-```
 
-```{r, message=FALSE, warning=FALSE}
 ggplotRegression <- function (fit) {
 require(ggplot2)
 ggplot(fit$model, aes_string(x = names(fit$model)[2], y = names(fit$model)[1])) + 
-  geom_point() +
+  geom_point(color = "grey50") +
   stat_smooth(method = "lm", col = "blue", size=2, se = TRUE) +
   labs(subtitle = paste(" Slope =",signif(fit$coef[[2]], 3),
                         " P =",signif(summary(fit)$coef[2,4], 3),
@@ -110,16 +108,7 @@ ggplot(fit$model, aes_string(x = names(fit$model)[2], y = names(fit$model)[1])) 
                      ))
 }
 
-ggplot(data = LPS.Response.final, aes(x = log2FC.CON, y = log2FC.MIA, color=factor(Group))) + geom_point() + scale_color_manual(values = c("black", "red","hotpink"), labels = c("CON only","MIA only","CON & MIA")) + geom_abline(slope=1, size=0.5) + labs(x="Con logFC",y="MIA logFC", color="") + theme_cowplot() + geom_vline(xintercept = 0) + geom_hline(yintercept = 0) + xlim(-30,30) + ylim(-30,35)
-
 ggplotRegression(lm(LPS.Response.final$log2FC.MIA ~ LPS.Response.final$log2FC.CON, data=LPS.Response.final)) + geom_abline(slope=1) + labs(x="CON logFC (LPS/SAL)", y="MIA logFC (LPS/SAL)") + theme_cowplot() + xlim(-30,35) + ylim(-30,35)
-
-dim(LPS.Response.final %>% dplyr::filter(log2FC.CON>0 & log2FC.MIA >0 & log2FC.MIA > log2FC.CON)) # 1557
-dim(LPS.Response.final %>% dplyr::filter(log2FC.CON>0 & log2FC.MIA >0 & log2FC.MIA < log2FC.CON)) # 1240
-dim(LPS.Response.final %>% dplyr::filter(log2FC.CON<0 & log2FC.MIA <0 & log2FC.MIA > log2FC.CON)) # 1417
-dim(LPS.Response.final %>% dplyr::filter(log2FC.CON<0 & log2FC.MIA <0 & log2FC.MIA < log2FC.CON)) # 1657
-dim(LPS.Response.final %>% dplyr::filter(log2FC.CON>0 & log2FC.MIA <0)) # 98
-dim(LPS.Response.final %>% dplyr::filter(log2FC.CON<0 & log2FC.MIA >0)) # 138
 ```
 
 ## Statistical Concordance of MIA and CON LPS Response
