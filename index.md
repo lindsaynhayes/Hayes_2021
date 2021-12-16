@@ -1,4 +1,4 @@
-## Welcome to GitHub Pages
+## Welcome to GitHub Page for the manuscript Hayes et al. 2022
 
 You can use the [editor on GitHub](https://github.com/lindsaynhayes/Hayes_2021/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
 
@@ -25,7 +25,7 @@ Syntax highlighted code block
 
 (https://github.com/lindsaynhayes/Hayes_2021/blob/gh-pages/LPS_Serum.md)(url) and ![Image](src)
 ```
-[Serum IL-6 after LPS folder]( https://lindsaynhayes.github.io/Hayes_2021/Serum_LPS/Serum_LPS.html )
+[Serum IL-6 after LPS folder]( https://lindsaynhayes.github.io/Hayes_2021/Serum/Serum_LPS.html )
 
 
 For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
