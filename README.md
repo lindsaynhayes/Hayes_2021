@@ -19,10 +19,10 @@ FACS quantification of MG ablation:
 
 RNA sequencing analysis of microglia in Fig 1 & Ext Data Fig 1-3:
 - MACS-MG Adult LPS Response: [link]( https://lindsaynhayes.github.io/Hayes_2021/Bulk_RNAseq_MACS/DESeq2_MACS_Adult_Bulk_publication.html ) | [script](https://github.com/lindsaynhayes/Hayes_2021/blob/gh-pages/Bulk_RNAseq_MACS/DESeq2_MACS_Adult_Bulk_publication.Rmd)
-- [Cell Type Heatmap_MACS]( https://lindsaynhayes.github.io/Hayes_2021/Bulk_RNAseq_MACS/DESeq2_MACS_Adult_Bulk_Heatmap.html )  | [script](https://github.com/lindsaynhayes/Hayes_2021/blob/gh-pages/Bulk_RNAseq_MACS/DESeq2_MACS_Adult_Bulk_Heatmap.Rmd)
-- [Volcanos]( https://lindsaynhayes.github.io/Hayes_2021/Bulk_RNAseq_MACS/DESeq2_MACS_Adult_Bulk_Volcano.html ) | [script](https://github.com/lindsaynhayes/Hayes_2021/blob/gh-pages/Bulk_RNAseq_MACS/DESeq2_MACS_Adult_Bulk_Volcano.Rmd)
-- [Cell Type Heatmap_FACS]( https://lindsaynhayes.github.io/Hayes_2021/Bulk_RNAseq_FACS/DESeq2_FACS_Bulk_Heatmap.html ) | [script](https://github.com/lindsaynhayes/Hayes_2021/blob/gh-pages/Bulk_RNAseq_FACS/DESeq2_FACS_Bulk_Heatmap.Rmd)
-- [Regional MG Blunting]( https://lindsaynhayes.github.io/Hayes_2021/Bulk_RNAseq_MACS/DESeq2_MACS_Adult_Bulk_Region_publication.html) | [script](https://github.com/lindsaynhayes/Hayes_2021/blob/gh-pages/Bulk_RNAseq_MACS/DESeq2_MACS_Adult_Bulk_Region_publication.Rmd)
+- Cell Type Heatmap_MACS: [link]( https://lindsaynhayes.github.io/Hayes_2021/Bulk_RNAseq_MACS/DESeq2_MACS_Adult_Bulk_Heatmap.html )  | [script](https://github.com/lindsaynhayes/Hayes_2021/blob/gh-pages/Bulk_RNAseq_MACS/DESeq2_MACS_Adult_Bulk_Heatmap.Rmd)
+- Volcanos: [link]( https://lindsaynhayes.github.io/Hayes_2021/Bulk_RNAseq_MACS/DESeq2_MACS_Adult_Bulk_Volcano.html ) | [script](https://github.com/lindsaynhayes/Hayes_2021/blob/gh-pages/Bulk_RNAseq_MACS/DESeq2_MACS_Adult_Bulk_Volcano.Rmd)
+- Cell Type Heatmap_FACS: [link]( https://lindsaynhayes.github.io/Hayes_2021/Bulk_RNAseq_FACS/DESeq2_FACS_Bulk_Heatmap.html ) | [script](https://github.com/lindsaynhayes/Hayes_2021/blob/gh-pages/Bulk_RNAseq_FACS/DESeq2_FACS_Bulk_Heatmap.Rmd)
+- Regional MG Blunting: [link]( https://lindsaynhayes.github.io/Hayes_2021/Bulk_RNAseq_MACS/DESeq2_MACS_Adult_Bulk_Region_publication.html) | [script](https://github.com/lindsaynhayes/Hayes_2021/blob/gh-pages/Bulk_RNAseq_MACS/DESeq2_MACS_Adult_Bulk_Region_publication.Rmd)
 
 MIA IL-6 serum resonse to LPS Fig 1g:
 - [IL-6]( https://lindsaynhayes.github.io/Hayes_2021/Serum/1g_LPS_Serum.html )
