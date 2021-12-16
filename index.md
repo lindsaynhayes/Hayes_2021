@@ -2,7 +2,7 @@
 ## **Data Analyses**
 
 ### Microglia blunting in Fig 1 & Ext Data Fig 1-3:
-MACS-MG Adult LPS Response [html]( https://lindsaynhayes.github.io/Hayes_2021/Bulk_RNAseq_MACS/DESeq2_MACS_Adult_Bulk_publication.html ) | [script]( https://github.com/lindsaynhayes/Hayes_2021/blob/gh-pages/Bulk_RNAseq_MACS/DESeq2_MACS_Adult_Bulk_publication.Rmd ) 
+Microglia Adult LPS Response [html]( https://lindsaynhayes.github.io/Hayes_2021/Bulk_RNAseq_MACS/DESeq2_MACS_Adult_Bulk_publication.html ) | [script]( https://github.com/lindsaynhayes/Hayes_2021/blob/gh-pages/Bulk_RNAseq_MACS/DESeq2_MACS_Adult_Bulk_publication.Rmd ) 
 
 Cell-Type Heatmap_MACS [html]( https://lindsaynhayes.github.io/Hayes_2021/Bulk_RNAseq_MACS/DESeq2_MACS_Adult_Bulk_Heatmap.html ) | [script]( https://github.com/lindsaynhayes/Hayes_2021/blob/gh-pages/Bulk_RNAseq_MACS/DESeq2_MACS_Adult_Bulk_Heatmap.Rmd) 
 
