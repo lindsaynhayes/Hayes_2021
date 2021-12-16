@@ -26,12 +26,12 @@ RNA sequencing of neonatal microglia in Fig 2:
  [P4 MG]( https://lindsaynhayes.github.io/Hayes_2021/Bulk_RNAseq_P4/DESeq2_MACS_P4_Bulk_pub.html)
 
 Disease enrichment of DEGs Fig 2g: 
-* [ADHD]( https://lindsaynhayes.github.io/Hayes_2021/Disease_Enrichment/ADHD.html )  |
- * [ASD]( https://lindsaynhayes.github.io/Hayes_2021/Disease_Enrichment/AUT.html )  |
- * [BP]( https://lindsaynhayes.github.io/Hayes_2021/Disease_Enrichment/BPD.html )  |
-  * [MDD]( https://lindsaynhayes.github.io/Hayes_2021/Disease_Enrichment/DEP.html )  |
-  * [SZ]( https://lindsaynhayes.github.io/Hayes_2021/Disease_Enrichment/SCZ.html )  |
-   * [multiple comparison correction]( https://lindsaynhayes.github.io/Hayes_2021/Disease_Enrichment/P_correct.nb.html)
+* [ADHD]( https://lindsaynhayes.github.io/Hayes_2021/Disease_Enrichment/ADHD.html )
+* [ASD]( https://lindsaynhayes.github.io/Hayes_2021/Disease_Enrichment/AUT.html )
+* [BP]( https://lindsaynhayes.github.io/Hayes_2021/Disease_Enrichment/BPD.html )
+* [MDD]( https://lindsaynhayes.github.io/Hayes_2021/Disease_Enrichment/DEP.html )
+* [SZ]( https://lindsaynhayes.github.io/Hayes_2021/Disease_Enrichment/SCZ.html )
+* [multiple comparison correction]( https://lindsaynhayes.github.io/Hayes_2021/Disease_Enrichment/P_correct.nb.html)
 
 ATAC Sequencing in Fig 3:
 [ATAC]( https://lindsaynhayes.github.io/Hayes_2021/ATAC/210329_ATAC_v3_MvCinLPS_pub.html ) | 
