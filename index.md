@@ -22,12 +22,12 @@
 
 [RNA sequencing of neonatal microglia in Fig 2]( https://lindsaynhayes.github.io/Hayes_2021/Serum/DESeq2_MACS_P4_Bulk_pub.html)
 
-Disease enrichment of DEGs Fig 2
-[ADHD]( https://lindsaynhayes.github.io/Hayes_2021/Disease_Enrichment/ADHD.html )
-[ASD]( https://lindsaynhayes.github.io/Hayes_2021/Disease_Enrichment/AUT.html )
-[BP]( https://lindsaynhayes.github.io/Hayes_2021/Disease_Enrichment/BPD.html )
-[MDD]( https://lindsaynhayes.github.io/Hayes_2021/Disease_Enrichment/DEP.html )
-[SZ]( https://lindsaynhayes.github.io/Hayes_2021/Disease_Enrichment/SCZ.html )
+Disease enrichment of DEGs Fig 2: 
+[ADHD]( https://lindsaynhayes.github.io/Hayes_2021/Disease_Enrichment/ADHD.html )  |
+[ASD]( https://lindsaynhayes.github.io/Hayes_2021/Disease_Enrichment/AUT.html )  |
+[BP]( https://lindsaynhayes.github.io/Hayes_2021/Disease_Enrichment/BPD.html )  |
+[MDD]( https://lindsaynhayes.github.io/Hayes_2021/Disease_Enrichment/DEP.html )  |
+[SZ]( https://lindsaynhayes.github.io/Hayes_2021/Disease_Enrichment/SCZ.html )  |
 [multiple comparison correction]( https://lindsaynhayes.github.io/Hayes_2021/Disease_Enrichment/P_correct.nb.html)
 
 
