@@ -7,6 +7,9 @@ RNA sequencing analysis of microglia in Fig 1 & Ext Data Fig 1-3:
  [Cell Type Heatmap_MACS]( https://lindsaynhayes.github.io/Hayes_2021/Bulk_RNAseq_MACS/DESeq2_MACS_Adult_Bulk_Heatmap.html )  |
  [Volcanos]( https://lindsaynhayes.github.io/Hayes_2021/Bulk_RNAseq_MACS/DESeq2_MACS_Adult_Bulk_Volcano.html ) |
  [Cell Type Heatmap_FACS]( https://lindsaynhayes.github.io/Hayes_2021/Bulk_RNAseq_FACS/DESeq2_FACS_Bulk_Heatmap.html )
+ 
+Analysis of regional blunting of MIA microglia: Ext Data Fig 3:
+[TEXT]( https://lindsaynhayes.github.io/Hayes_2021/Bulk_RNAseq_MACS/DESeq2_MACS_Adult_Bulk_Region_publication.html)
 
 MIA IL-6 serum resonse to LPS Fig 1g:
  [IL-6]( https://lindsaynhayes.github.io/Hayes_2021/Serum/1g_LPS_Serum.html )
@@ -62,7 +65,7 @@ No Effect of Sex by qPCR Ext Data Fig 9:
 [qPCR]( https://lindsaynhayes.github.io/Hayes_2021/qPCR/QPCR-C8-26_pub.html)
 
 
-[TEXT]( https://lindsaynhayes.github.io/Hayes_2021/x/y)
+
 [TEXT]( https://lindsaynhayes.github.io/Hayes_2021/x/y)
  
 
