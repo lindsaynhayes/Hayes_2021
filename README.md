@@ -56,16 +56,14 @@ Rescue of Microglia Blunting with Prenatal Microglia Replacement in Fig 4 and Ex
 - Rescue PCA: [link]( https://lindsaynhayes.github.io/Hayes_2021/Bulk_RNAseq_Rescue_FACS/PCA_Clust.html) | [script](https://github.com/lindsaynhayes/Hayes_2021/blob/gh-pages/Bulk_RNAseq_Rescue_FACS/PCA_Clust.Rmd)
 - Rescue volcanos: [link]( https://lindsaynhayes.github.io/Hayes_2021/Bulk_RNAseq_Rescue_FACS/Volcano.html) | [script](https://github.com/lindsaynhayes/Hayes_2021/blob/gh-pages/Bulk_RNAseq_Rescue_FACS/Volcano.Rmd)
 
-Validation of the rescue of microglia bluting using protein expression Fig 4-5:
- [Protein Rescue]( https://lindsaynhayes.github.io/Hayes_2021/Protein/MSD_Cells_Rescue_Stats.html) | [script](https://github.com/lindsaynhayes/Hayes_2021/blob/gh-pages/Protein/MSD_Cells_Rescue_Stats.Rmd)
+Validation of the rescue of microglia bluting using protein expression Fig 4-5: [link]( https://lindsaynhayes.github.io/Hayes_2021/Protein/MSD_Cells_Rescue_Stats.html) | [script](https://github.com/lindsaynhayes/Hayes_2021/blob/gh-pages/Protein/MSD_Cells_Rescue_Stats.Rmd)
 
 MSN Electrophysiology Fig. 5, Ext Data 8:
 - MIA MSN phenotype [link]( https://lindsaynhayes.github.io/Hayes_2021/Ephys/210907-Ephy-Analysis.html)| [script](https://github.com/lindsaynhayes/Hayes_2021/blob/gh-pages/Ephys/210907-Ephy-Analysis.Rmd)
 - Rescue of MSN [link]( https://lindsaynhayes.github.io/Hayes_2021/Ephys/210905-Ephy-Analysis.html)| [script](https://github.com/lindsaynhayes/Hayes_2021/blob/gh-pages/Ephys/210905-Ephy-Analysis.Rmd)
 - spine analysis [link]( https://lindsaynhayes.github.io/Hayes_2021/Ephys/Spine-Analysis_VS.html)| [script](https://github.com/lindsaynhayes/Hayes_2021/blob/gh-pages/Ephys/Spine-Analysis_VS.Rmd)
 
-No Effect of Sex by qPCR Ext Data Fig 9:
-- [qPCR]( https://lindsaynhayes.github.io/Hayes_2021/qPCR/QPCR-C8-26_pub.html) | [script](https://github.com/lindsaynhayes/Hayes_2021/blob/gh-pages/qPCR/QPCR-C8-26_pub.Rmd)
+No Effect of Sex by qPCR Ext Data Fig 9: [link]( https://lindsaynhayes.github.io/Hayes_2021/qPCR/QPCR-C8-26_pub.html) | [script](https://github.com/lindsaynhayes/Hayes_2021/blob/gh-pages/qPCR/QPCR-C8-26_pub.Rmd)
 
 
 [TEXT](https://lindsaynhayes.github.io/Hayes_2021/x/y) | [script](https://github.com/lindsaynhayes/Hayes_2021/blob/gh-pages//.Rmd)
