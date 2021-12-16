@@ -1,5 +1,15 @@
-# Welcome the Hayes et al. 2022 Github Page
+# Hayes et al. 2022
 ## **Data Analyses**
+
+### Microglia blunting in Fig 1 & Ext Data Fig 1-3:
+MACS-MG Adult LPS Response [html]( https://lindsaynhayes.github.io/Hayes_2021/Bulk_RNAseq_MACS/DESeq2_MACS_Adult_Bulk_publication.html ) | [script]( https://github.com/lindsaynhayes/Hayes_2021/blob/gh-pages/Bulk_RNAseq_MACS/DESeq2_MACS_Adult_Bulk_publication.Rmd ) 
+
+Cell-Type Heatmap_MACS [html}( https://lindsaynhayes.github.io/Hayes_2021/Bulk_RNAseq_MACS/DESeq2_MACS_Adult_Bulk_Heatmap.html ) | [script]( https://github.com/lindsaynhayes/Hayes_2021/blob/gh-pages/Bulk_RNAseq_MACS/DESeq2_MACS_Adult_Bulk_Heatmap.Rmd) 
+
+Volcanos [html]( https://lindsaynhayes.github.io/Hayes_2021/Bulk_RNAseq_MACS/DESeq2_MACS_Adult_Bulk_Volcano.html ) |[script]( https://github.com/lindsaynhayes/Hayes_2021/blob/gh-pages/Bulk_RNAseq_MACS/DESeq2_MACS_Adult_Bulk_Volcano.Rmd ) 
+
+Cell-Type Heatmap_FACS [html]( https://lindsaynhayes.github.io/Hayes_2021/Bulk_RNAseq_FACS/DESeq2_FACS_Bulk_Heatmap.html ) | [script]( https://github.com/lindsaynhayes/Hayes_2021/blob/gh-pages/Bulk_RNAseq_FACS/DESeq2_FACS_Bulk_Heatmap.Rmd ) 
+
 
 Serum IL-6 after LPS: 
 [html]( https://lindsaynhayes.github.io/Hayes_2021/Serum/1g_LPS_Serum.html  )  |  [script](https://github.com/lindsaynhayes/Hayes_2021/blob/gh-pages/Serum/1g_LPS_Serum.Rmd)
@@ -8,6 +18,10 @@ Serum IL-6 after LPS:
 FACS quantification of MG ablation: 
 [html]( https://lindsaynhayes.github.io/Hayes_2021/FACS/Fig_ED7e.html )  |  [script](https://github.com/lindsaynhayes/Hayes_2021/blob/gh-pages/FACS/Fig_ED7e.Rmd)
 
+
+[script]( https://github.com/lindsaynhayes/Hayes_2021/blob/gh-pages//.Rmd ) 
+
+### Style 2
 
 RNA sequencing analysis of microglia in Fig 1 & Ext Data Fig 1-3:
  [MACS-MG Adult LPS Response]( https://lindsaynhayes.github.io/Hayes_2021/Bulk_RNAseq_MACS/DESeq2_MACS_Adult_Bulk_publication.html ) | 
