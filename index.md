@@ -44,7 +44,7 @@ Rescue of Microglia Blunting with Prenatal Microglia Replacement:
 * [Ext Data Fig. 7: Rescue PCA]( https://lindsaynhayes.github.io/Hayes_2021/Bulk_RNAseq_Rescue_FACS/PCA_Clust.html)
 * [Ext Data Fig. 7: Rescue volcanos]( https://lindsaynhayes.github.io/Hayes_2021/Bulk_RNAseq_Rescue_FACS/Volcano.html)
 
-Validation of the rescue of microglia bluting using protein expression Fig 4-5:
+Rescue of microglia bluting in protein expression Fig 4-5:
  [Protein Rescue]( https://lindsaynhayes.github.io/Hayes_2021/Protein/MSD_Cells_Rescue_Stats.html)
 
 MSN Electrophysiology Fig. 5, Ext Data 8:
