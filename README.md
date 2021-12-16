@@ -24,22 +24,18 @@ RNA sequencing analysis of microglia in Fig 1 & Ext Data Fig 1-3:
 - Cell Type Heatmap_FACS: [link]( https://lindsaynhayes.github.io/Hayes_2021/Bulk_RNAseq_FACS/DESeq2_FACS_Bulk_Heatmap.html ) | [script](https://github.com/lindsaynhayes/Hayes_2021/blob/gh-pages/Bulk_RNAseq_FACS/DESeq2_FACS_Bulk_Heatmap.Rmd)
 - Regional MG Blunting: [link]( https://lindsaynhayes.github.io/Hayes_2021/Bulk_RNAseq_MACS/DESeq2_MACS_Adult_Bulk_Region_publication.html) | [script](https://github.com/lindsaynhayes/Hayes_2021/blob/gh-pages/Bulk_RNAseq_MACS/DESeq2_MACS_Adult_Bulk_Region_publication.Rmd)
 
-MIA IL-6 serum resonse to LPS Fig 1g:
-- [IL-6]( https://lindsaynhayes.github.io/Hayes_2021/Serum/1g_LPS_Serum.html )
+MIA IL-6 serum resonse to LPS Fig 1g: [link]( https://lindsaynhayes.github.io/Hayes_2021/Serum/1g_LPS_Serum.html ) | [script](https://github.com/lindsaynhayes/Hayes_2021/blob/gh-pages/Serum/1g_LPS_Serum.Rmd)
 
 MIA microglia morphology in Fig 1 & Ext Data Fig 4:
-- [CD68]( https://lindsaynhayes.github.io/Hayes_2021/MG_Morph/MG_CD68_pub.html ) |
-- [Sholl]( https://lindsaynhayes.github.io/Hayes_2021/Serum/MG_Sholl.html ) |
-- [Density]( https://lindsaynhayes.github.io/Hayes_2021/Serum/MG_Density_pub.html )
+- CD68: [link]( https://lindsaynhayes.github.io/Hayes_2021/MG_Morph/MG_CD68_pub.html ) | [script](https://github.com/lindsaynhayes/Hayes_2021/blob/gh-pages/MG_Morph/MG_CD68_pub.Rmd)
+- Sholl: [link]( https://lindsaynhayes.github.io/Hayes_2021/MG_Morph/MG_Sholl.html ) | [script](https://github.com/lindsaynhayes/Hayes_2021/blob/gh-pages/MG_Morph/MG_Sholl.Rmd)
+- Density: [link]( https://lindsaynhayes.github.io/Hayes_2021/MG_Morph/MG_Density_pub.html ) | [script](https://github.com/lindsaynhayes/Hayes_2021/blob/gh-pages/MG_Morph/MG_Density_pub.Rmd)
 
-Single Cell RNA sequencing in Fig 1, 4, & Ext Data 5:
-[script](https://github.com/lindsaynhayes/Hayes_2021/blob/gh-pages/SingleCell/10x_analysis_pub.r)
+Single Cell RNA sequencing in Fig 1, 4, & Ext Data 5: [script](https://github.com/lindsaynhayes/Hayes_2021/blob/gh-pages/SingleCell/10x_analysis_pub.r)
  
-Microglia In Vitro Activation in Fig 2 and Ext Data Fig 9:
- [In Vitro]( https://lindsaynhayes.github.io/Hayes_2021/InVitro/210903_invitro.html )
+Microglia In Vitro Activation in Fig 2 and Ext Data Fig 9: [link]( https://lindsaynhayes.github.io/Hayes_2021/InVitro/210903_invitro.html ) | [script](https://github.com/lindsaynhayes/Hayes_2021/blob/gh-pages/InVitro/210903_invitro.Rmd)
 
-RNA sequencing of neonatal microglia in Fig 2:
- [P4 MG]( https://lindsaynhayes.github.io/Hayes_2021/Bulk_RNAseq_P4/DESeq2_MACS_P4_Bulk_pub.html)
+RNA sequencing of neonatal microglia in Fig 2: [link]( https://lindsaynhayes.github.io/Hayes_2021/Bulk_RNAseq_P4/DESeq2_MACS_P4_Bulk_pub.html) | [script](https://github.com/lindsaynhayes/Hayes_2021/blob/gh-pages/Bulk_RNAseq_P4/DESeq2_MACS_P4_Bulk_pub.Rmd)
 
 Disease enrichment of DEGs Fig 2g: 
 - [ADHD]( https://lindsaynhayes.github.io/Hayes_2021/Disease_Enrichment/ADHD.html )  |
