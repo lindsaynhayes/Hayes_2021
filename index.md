@@ -54,9 +54,9 @@ Validation of the rescue of microglia bluting using protein expression Fig 4-5:
  [Protein Rescue]( https://lindsaynhayes.github.io/Hayes_2021/Protein/MSD_Cells_Rescue_Stats.html)
 
 MSN Electrophysiology Fig. 5, Ext Data 8
- [1]( https://lindsaynhayes.github.io/Hayes_2021/x/210905-Ephy-Analysis.html)   |
- [2]( https://lindsaynhayes.github.io/Hayes_2021/x/210907-Ephy-Analysis.html)   |
- [spine analysis]( https://lindsaynhayes.github.io/Hayes_2021/x/Spine-Analysis_VS.html)
+ [1]( https://lindsaynhayes.github.io/Hayes_2021/Ephys/210905-Ephy-Analysis.html)   |
+ [2]( https://lindsaynhayes.github.io/Hayes_2021/Ephys/210907-Ephy-Analysis.html)   |
+ [spine analysis]( https://lindsaynhayes.github.io/Hayes_2021/Ephys/Spine-Analysis_VS.html)
 
 
 [TEXT]( https://lindsaynhayes.github.io/Hayes_2021/x/y)
