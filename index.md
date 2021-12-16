@@ -1,6 +1,5 @@
-## Welcome to the GitHub Page for the manuscript: Hayes et al. 2022
-
-### **Data Analyses**
+# Welcome the Hayes et al. 2022 Github Page
+## **Data Analyses**
 
 Serum IL-6 after LPS: 
 [html]( https://lindsaynhayes.github.io/Hayes_2021/Serum/1g_LPS_Serum.html  )  |  [script](https://github.com/lindsaynhayes/Hayes_2021/blob/gh-pages/Serum/1g_LPS_Serum.Rmd)
