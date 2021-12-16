@@ -3,7 +3,9 @@
 ### Data Analysis included in the manuscript
 
 [RNA sequencing of microglia in Fig 1]( https://lindsaynhayes.github.io/Hayes_2021/Bulk_RNAseq_MACS/DESeq2_MACS_Adult_Bulk_publication.html )
+
 [Ext Data Fig 1 Heatmap]( https://lindsaynhayes.github.io/Hayes_2021/Bulk_RNAseq_MACS/DESeq2_MACS_Adult_Bulk_Heatmap.html )
+
 [Ext Data Fig 1 Volcanos]( https://lindsaynhayes.github.io/Hayes_2021/Bulk_RNAseq_MACS/DESeq2_MACS_Adult_Bulk_Volcano.html )
 
 
