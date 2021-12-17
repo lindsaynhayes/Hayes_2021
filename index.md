@@ -13,8 +13,8 @@ MIA IL-6 serum resonse to LPS Fig 1g:
 
 MIA microglia morphology in Fig 1 & Ext Data Fig 4:
 * [CD68]( https://lindsaynhayes.github.io/Hayes_2021/MG_Morph/MG_CD68_pub.html )
-* [Sholl]( https://lindsaynhayes.github.io/Hayes_2021/Serum/MG_Sholl.html )
-* [Density]( https://lindsaynhayes.github.io/Hayes_2021/Serum/MG_Density_pub.html )
+* [Sholl]( https://lindsaynhayes.github.io/Hayes_2021/MG_Morph/MG_Sholl.html )
+* [Density]( https://lindsaynhayes.github.io/Hayes_2021/MG_Morph/MG_Density_pub.html )
 
 Single Cell RNA sequencing in Fig 1, 4, & Ext Data 5:
 [script](https://github.com/lindsaynhayes/Hayes_2021/blob/gh-pages/SingleCell/10x_analysis_pub.r)
