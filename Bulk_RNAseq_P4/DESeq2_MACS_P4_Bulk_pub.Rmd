@@ -16,18 +16,18 @@ library(org.Mm.eg.db)
 library(AnnotationDbi)
 library(tidyverse)
 ```
-```{r import, echo=FALSE}
+```{r import}
+setwd("~/Desktop/Hayes 2021/github/Hayes_2021/Bulk_RNAseq_P4")
 load("../1.align/txi.rsem.RData")
 metadata <- read.csv("metadata.csv", stringsAsFactors = TRUE)
 rownames(metadata) <- metadata$ID
-#all.equal(colnames(txi.rsem$counts), as.character(metadata$ID))
+all.equal(colnames(txi.rsem$counts), as.character(metadata$ID))
 ```
 
 ```{r dds, message=FALSE, warning=FALSE}
 dds <- DESeqDataSetFromTximport(txi.rsem, colData = metadata, design = ~ Group)
 # filter low expressed genes and samples
 
-dds <- dds[,samp]
 keep <- rowSums(counts(dds)) >= 50
 table(keep)
 dds <- dds[keep,]
