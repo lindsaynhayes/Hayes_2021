@@ -54,5 +54,3 @@ MSN Electrophysiology Fig. 5, Ext Data 8:
 
 No Effect of Sex by qPCR Ext Data Fig 9:
 [qPCR]( https://lindsaynhayes.github.io/Hayes_2021/qPCR/QPCR-C8-26_pub.html)
-
-[T]( https://lindsaynhayes.github.io/Hayes_2021/x/y)
