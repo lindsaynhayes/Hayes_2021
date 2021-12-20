@@ -21,9 +21,8 @@ library(AnnotationDbi)
 ```{r import, message=FALSE, warning=FALSE, echo=FALSE}
 load("../1.align/txi.rsem.RData")
 metadata <- read.csv("metadata.csv", stringsAsFactors = TRUE)
-metadata$trt <- factor(metadata$trt, levels=c("SAL","LPS", "P4"))
 rownames(metadata) <- metadata$ID
-all.equal(colnames(txi.rsem$counts), as.character(metadata$ID))
+#all.equal(colnames(txi.rsem$counts), as.character(metadata$ID))
 ```
 
 ### referece: https://rpubs.com/ge600/deseq2
@@ -47,7 +46,6 @@ symbol <- mapIds(edb, keys=genes, column="SYMBOL", keytype="GENEID", multiVals="
 mcols(dds) <- cbind(mcols(dds), symbol)
 
 dds <- DESeq(dds)
-resultsNames(dds)
 
 LvSinCON <- (results(dds, name="trt_LPS_vs_SAL", alpha=0.05))
 LvSinMIA <- (results(dds, list( c("trt_LPS_vs_SAL","groupMIA.trtLPS")), alpha=0.05))
@@ -93,9 +91,7 @@ for (i in c(1:nrow(LPS.Response))){
     LPS.Response$Group[i]=4}
   
 }
-table(LPS.Response$Group)
 LPS.Response.final<-subset(LPS.Response, LPS.Response$Group != 4)
-
 ggplotRegression <- function (fit) {
 require(ggplot2)
 ggplot(fit$model, aes_string(x = names(fit$model)[2], y = names(fit$model)[1])) + 

@@ -355,20 +355,9 @@ pre code {
 <div id="figure-ed1---heatmap" class="section level1">
 <h1>Figure ED1 - Heatmap</h1>
 <p>This is a heatmap and cluster analysis of the adult bulk RNA sequencing data to show cell type specificity.</p>
-<pre class="r"><code>tpm &lt;- read.csv(&quot;../1.align/expression/TPM.csv&quot;, stringsAsFactors = TRUE, row.names = 1)
-metadata &lt;- read.csv(&quot;metadata.csv&quot;, stringsAsFactors = TRUE)
-metadata$Trt &lt;- factor(metadata$trt, levels=c(&quot;SAL&quot;,&quot;LPS&quot;))
-rownames(metadata) &lt;- metadata$ID
-all.equal(colnames(tpm), as.character(metadata$ID))</code></pre>
-<pre><code>## [1] TRUE</code></pre>
 <pre class="r"><code>genes &lt;- gsub(&quot;\\..*&quot;,&quot;&quot;,rownames(tpm))
 symbols &lt;- mapIds(org.Mm.eg.db, keys=genes, column=&quot;SYMBOL&quot;, keytype=&quot;ENSEMBL&quot;, multiVals=&quot;first&quot;)</code></pre>
 <pre><code>## &#39;select()&#39; returned 1:many mapping between keys and columns</code></pre>
-<pre class="r"><code>adult &lt;- metadata$age != &quot;P4&quot;
-metadata &lt;- metadata[adult,]
-tpm &lt;- tpm[,adult]
-all.equal(colnames(tpm), as.character(metadata$ID))</code></pre>
-<pre><code>## [1] TRUE</code></pre>
 <pre class="r"><code>log_tpm &lt;- log(tpm+1)
 log_tpm$symbol &lt;- symbols</code></pre>
 <div id="heatmap" class="section level3">

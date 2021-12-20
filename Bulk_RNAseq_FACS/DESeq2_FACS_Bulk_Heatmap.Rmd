@@ -1,10 +1,8 @@
 ---
 title: "DESeq2_FACS_Heatmap"
-output: 
-  html_document: 
-    keep_md: yes
+output: html_document
 editor_options: 
-  chunk_output_type: console  
+  chunk_output_type: console
 ---
 # Figure ED1 - Heatmap
 This is a heatmap and cluster analysis of the adult bulk RNA sequencing data to show cell type specificity.
@@ -18,21 +16,16 @@ library(DESeq2)
 library(org.Mm.eg.db)
 library(AnnotationDbi)
 ```
-```{r import}
+```{r import, echo=FALSE}
 tpm <- read.csv("../1.align/expression/TPM.csv", stringsAsFactors = TRUE, row.names = 1)
 metadata <- read.csv("metadata.csv", stringsAsFactors = TRUE)
 metadata$Trt <- factor(metadata$trt, levels=c("SAL","LPS"))
 rownames(metadata) <- metadata$ID
-all.equal(colnames(tpm), as.character(metadata$ID))
-
+#all.equal(colnames(tpm), as.character(metadata$ID))
+```
+```{r}
 genes <- gsub("\\..*","",rownames(tpm))
 symbols <- mapIds(org.Mm.eg.db, keys=genes, column="SYMBOL", keytype="ENSEMBL", multiVals="first")
-
-adult <- metadata$age != "P4"
-metadata <- metadata[adult,]
-tpm <- tpm[,adult]
-all.equal(colnames(tpm), as.character(metadata$ID))
-
 log_tpm <- log(tpm+1)
 log_tpm$symbol <- symbols
 ```

@@ -8,7 +8,7 @@ editor_options:
 ---
 
 # Analysis of ATAC Seq Data
-MIA vs CON after LPS
+## MIA vs CON after LPS Treatment
 ```{r, echo=FALSE, message=FALSE, warning=F}
 library(tidyverse)
 library(DiffBind)
@@ -19,9 +19,8 @@ library(genefilter)
 library(qvalue)
 ```
 ## Load Data
-```{r}
+```{r, echo=FALSE}
 DBA <- dba.load('dat_34_design')
-DBA
 ```
 ## Convert to a DESEQ2 object to evaluate interactions
 ```{r}
@@ -38,6 +37,7 @@ ggplot(t1, aes(x=log2FoldChange, y=-log10(pvalue), color = sig)) + geom_point() 
 
 ## Permutation Test for MIA vs CON at LPS
 ```{r}
+setwd("~/Data/ATACseq/ATAC-Nova-v3")
 samples <- read.csv("ATAC_sampleSheet_34.csv", header = TRUE, stringsAsFactors = TRUE)
 table(MvCinLPS$pvalue<0.05, dnn="p-value sig")
 table(MvCinLPS$padj<0.05, dnn="FDR sig")

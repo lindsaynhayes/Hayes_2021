@@ -357,54 +357,11 @@ pre code {
 
 <div id="analysis-of-atac-seq-data" class="section level1">
 <h1>Analysis of ATAC Seq Data</h1>
-<p>MIA vs CON after LPS</p>
+<div id="mia-vs-con-after-lps-treatment" class="section level2">
+<h2>MIA vs CON after LPS Treatment</h2>
+</div>
 <div id="load-data" class="section level2">
 <h2>Load Data</h2>
-<pre class="r"><code>DBA &lt;- dba.load(&#39;dat_34_design&#39;)
-DBA</code></pre>
-<pre><code>## 34 Samples, 69574 sites in matrix:
-##     ID  Factor Condition Treatment Replicate    Reads FRiP
-## 1  S01 CON.SAL       CON       SAL         1 45014448 0.09
-## 2  S04 CON.SAL       CON       SAL         2 41432381 0.09
-## 3  S09 CON.LPS       CON       LPS         1 53635083 0.08
-## 4  S10 CON.LPS       CON       LPS         2 42297900 0.13
-## 5  S12 CON.SAL       CON       SAL         3 61831668 0.07
-## 6  S14 MIA.LPS       MIA       LPS         1 43900781 0.10
-## 7  S15 MIA.LPS       MIA       LPS         2 51580826 0.13
-## 8  S16 CON.LPS       CON       LPS         3 46000711 0.08
-## 9  S17 MIA.LPS       MIA       LPS         3 43437549 0.08
-## 10 S18 CON.LPS       CON       LPS         4 41097391 0.11
-## 11 S20 MIA.SAL       MIA       SAL         1 47939949 0.10
-## 12 S21 MIA.SAL       MIA       SAL         2 59851923 0.18
-## 13 S22  CON.P4       CON        P4         1 51817835 0.16
-## 14 S23  MIA.P4       MIA        P4         1 38662120 0.13
-## 15 S24  MIA.P4       MIA        P4         2 52211843 0.09
-## 16 S25 MIA.SAL       MIA       SAL         3 49242233 0.07
-## 17 S28  MIA.P4       MIA        P4         3 48904653 0.09
-## 18 S29 MIA.SAL       MIA       SAL         4 46421851 0.08
-## 19 S30  MIA.P4       MIA        P4         4 38661084 0.12
-## 20 S32 CON.SAL       CON       SAL         4 42311970 0.16
-## 21 S33  CON.P4       CON        P4         2 54172820 0.12
-## 22 S34  MIA.P4       MIA        P4         5 43343656 0.06
-## 23 S37 MIA.SAL       MIA       SAL         5 46676225 0.10
-## 24 S38  MIA.P4       MIA        P4         6 36736489 0.10
-## 25 S39  CON.P4       CON        P4         3 35702481 0.08
-## 26 S40 MIA.LPS       MIA       LPS         4 74010858 0.08
-## 27 S42 CON.SAL       CON       SAL         5 43439349 0.14
-## 28 S45  CON.P4       CON        P4         4 40075833 0.09
-## 29 S46 CON.LPS       CON       LPS         6 45677712 0.08
-## 30 S50 MIA.LPS       MIA       LPS         5 58567220 0.15
-## 31 S51 MIA.SAL       MIA       SAL         6 59268002 0.12
-## 32 S52 CON.LPS       CON       LPS         5 45956512 0.08
-## 33 S53 CON.LPS       CON       LPS         6 59805893 0.09
-## 34 S54  CON.P4       CON        P4         5 44664426 0.06
-## 
-## Design: [~ Condition * Treatment] | 4 Contrasts:
-##      Factor Group Samples Group2 Samples2 DB.DESeq2
-## 1 Condition   CON      17    MIA       17         0
-## 2 Treatment   SAL      11    LPS       12      4755
-## 3 Treatment   SAL      11     P4       11      4916
-## 4 Treatment    P4      11    LPS       12      9367</code></pre>
 </div>
 <div id="convert-to-a-deseq2-object-to-evaluate-interactions" class="section level2">
 <h2>Convert to a DESEQ2 object to evaluate interactions</h2>
@@ -420,7 +377,8 @@ ggplot(t1, aes(x=log2FoldChange, y=-log10(pvalue), color = sig)) + geom_point() 
 </div>
 <div id="permutation-test-for-mia-vs-con-at-lps" class="section level2">
 <h2>Permutation Test for MIA vs CON at LPS</h2>
-<pre class="r"><code>samples &lt;- read.csv(&quot;ATAC_sampleSheet_34.csv&quot;, header = TRUE, stringsAsFactors = TRUE)
+<pre class="r"><code>setwd(&quot;~/Data/ATACseq/ATAC-Nova-v3&quot;)
+samples &lt;- read.csv(&quot;ATAC_sampleSheet_34.csv&quot;, header = TRUE, stringsAsFactors = TRUE)
 table(MvCinLPS$pvalue&lt;0.05, dnn=&quot;p-value sig&quot;)</code></pre>
 <pre><code>## p-value sig
 ## FALSE  TRUE 

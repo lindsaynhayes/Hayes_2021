@@ -354,7 +354,6 @@ pre code {
 
 <div id="validate-blunted-microglia-immune-response-using-facs-sorted-microglia" class="section level3">
 <h3>Validate blunted microglia immune response using FACS sorted microglia</h3>
-<pre><code>## [1] TRUE</code></pre>
 </div>
 <div id="referece-httpsrpubs.comge600deseq2" class="section level3">
 <h3>referece: <a href="https://rpubs.com/ge600/deseq2" class="uri">https://rpubs.com/ge600/deseq2</a></h3>
@@ -382,12 +381,8 @@ symbol &lt;- mapIds(edb, keys=genes, column=&quot;SYMBOL&quot;, keytype=&quot;GE
 mcols(dds) &lt;- cbind(mcols(dds), symbol)
 
 dds &lt;- DESeq(dds)
-resultsNames(dds)</code></pre>
-<pre><code>## [1] &quot;Intercept&quot;                &quot;group_MIA_vs_CON&quot;        
-## [3] &quot;trt_LPS_vs_SAL&quot;           &quot;trt_P4_vs_SAL&quot;           
-## [5] &quot;batch_qiagen_vs_picopure&quot; &quot;groupMIA.trtLPS&quot;         
-## [7] &quot;groupMIA.trtP4&quot;</code></pre>
-<pre class="r"><code>LvSinCON &lt;- (results(dds, name=&quot;trt_LPS_vs_SAL&quot;, alpha=0.05))
+
+LvSinCON &lt;- (results(dds, name=&quot;trt_LPS_vs_SAL&quot;, alpha=0.05))
 LvSinMIA &lt;- (results(dds, list( c(&quot;trt_LPS_vs_SAL&quot;,&quot;groupMIA.trtLPS&quot;)), alpha=0.05))
 
 LvSinCON$gene &lt;- symbol
@@ -430,12 +425,7 @@ for (i in c(1:nrow(LPS.Response))){
     LPS.Response$Group[i]=4}
   
 }
-table(LPS.Response$Group)</code></pre>
-<pre><code>## 
-##     1     2     3     4 
-##  1512  1138  3457 12344</code></pre>
-<pre class="r"><code>LPS.Response.final&lt;-subset(LPS.Response, LPS.Response$Group != 4)
-
+LPS.Response.final&lt;-subset(LPS.Response, LPS.Response$Group != 4)
 ggplotRegression &lt;- function (fit) {
 require(ggplot2)
 ggplot(fit$model, aes_string(x = names(fit$model)[2], y = names(fit$model)[1])) + 
