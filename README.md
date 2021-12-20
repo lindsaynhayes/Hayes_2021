@@ -1,4 +1,4 @@
-# Hayes et al. 2022
+# Hayes et al. 2021
 
 Results and Scripts for Hayes et al. 2021 Nature can be found here:
 https://lindsaynhayes.github.io/Hayes_2021/
