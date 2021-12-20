@@ -354,7 +354,7 @@ pre code {
 </div>
 
 
-<p>This is an rmarkdown of the ephys data from <strong>CON:CON</strong>, <strong>CON:PLX</strong>, <strong>MIA:CON</strong>, and <strong>MIA:PLX</strong> mice treated with 10 mg/kg PIC at E9 and PLX from E9-E12. Recordings were performed on D1TdTom- or Drd2-Cre; RCE+ cells in the ventral striatum.</p>
+<p>This is an rmarkdown of the ephys data from <strong>CON:CON</strong>, <strong>CON:PLX</strong>, <strong>MIA:CON</strong>, and <strong>MIA:PLX</strong> mice treated with 10 mg/kg PIC at E9 and PLX from E9-E12. Recordings were performed on D1TdTom- cells in the ventral striatum.</p>
 <div id="set-up-data-and-subset" class="section level3">
 <h3>Set-Up Data and Subset</h3>
 <pre><code>## &#39;data.frame&#39;:    58 obs. of  8 variables:
@@ -474,7 +474,7 @@ summary(lme.fit)</code></pre>
 ## CON:PLX - CON:CON == 0   0.0765     0.3523    0.22    0.995  
 ## MIA:CON - CON:CON == 0  -0.9481     0.3597   -2.64    0.030 *
 ## MIA:PLX - CON:CON == 0  -0.0483     0.3492   -0.14    0.999  
-## MIA:PLX - MIA:CON == 0   0.8997     0.3514    2.56    0.036 *
+## MIA:PLX - MIA:CON == 0   0.8997     0.3514    2.56    0.037 *
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## (Adjusted p values reported -- single-step method)</code></pre>
@@ -530,7 +530,8 @@ summary(lme.fit)</code></pre>
 </div>
 <div id="statistics-for-cumulative-probability-for-mepsc-frequency" class="section level3">
 <h3>Statistics for cumulative probability for mEPSC Frequency</h3>
-<pre class="r"><code>cumlFreq &lt;- read.csv(&quot;2110816_rescue_mEPSC_cumprob.csv&quot;, stringsAsFactors = T)
+<pre class="r"><code>setwd(&quot;~/Data/Ephys/Ephys/210905_Analysis&quot;)
+cumlFreq &lt;- read.csv(&quot;210816_rescue_mEPSC_cumprob.csv&quot;, stringsAsFactors = T)
 cumlFreq_v1 &lt;- filter(cumlFreq, Group %in% c(&quot;CON.CON&quot;, &quot;MIA.CON&quot;))
 
 cumlFreq&lt;- filter(cumlFreq, IEI &lt;= 4)

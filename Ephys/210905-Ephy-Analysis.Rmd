@@ -7,7 +7,7 @@ output:
 editor_options: 
   chunk_output_type: console
 ---
-This is an rmarkdown of the ephys data from **CON:CON**, **CON:PLX**, **MIA:CON**, and **MIA:PLX** mice treated with 10 mg/kg PIC at E9 and PLX from E9-E12. Recordings were performed on D1TdTom- or Drd2-Cre; RCE+ cells in the ventral striatum.
+This is an rmarkdown of the ephys data from **CON:CON**, **CON:PLX**, **MIA:CON**, and **MIA:PLX** mice treated with 10 mg/kg PIC at E9 and PLX from E9-E12. Recordings were performed on D1TdTom- cells in the ventral striatum.
 
 ### Set-Up Data and Subset
 ```{r, echo=FALSE, message=FALSE, error=FALSE}
@@ -17,7 +17,7 @@ library(cowplot)
 library(rstatix)
 library(multcomp)
 options(digits=4)
-
+setwd("~/Data/Ephys/Ephys/210905_Analysis")
 data <- read.csv("201109_rescue_mEPSC.csv", stringsAsFactors = T)
 data$Cell <- as.character(data$Cell)
 str(data)
@@ -57,7 +57,8 @@ summary(glht(lme.fit, linfct = mcp(Group = c("CON:PLX - CON:CON == 0", "MIA:CON 
 
 ### Statistics for cumulative probability for mEPSC Frequency
 ```{r fig.height=4, fig.width=10, warning=F}
-cumlFreq <- read.csv("2110816_rescue_mEPSC_cumprob.csv", stringsAsFactors = T)
+setwd("~/Data/Ephys/Ephys/210905_Analysis")
+cumlFreq <- read.csv("210816_rescue_mEPSC_cumprob.csv", stringsAsFactors = T)
 cumlFreq_v1 <- filter(cumlFreq, Group %in% c("CON.CON", "MIA.CON"))
 
 cumlFreq<- filter(cumlFreq, IEI <= 4)
