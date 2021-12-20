@@ -27,7 +27,6 @@ rownames(metadata) <- metadata$ID
 dds <- DESeqDataSetFromTximport(txi.rsem, colData = metadata, design = ~ Group)
 # filter low expressed genes and samples
 
-dds <- dds[,samp]
 keep <- rowSums(counts(dds)) >= 50
 table(keep)
 dds <- dds[keep,]
