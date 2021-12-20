@@ -17,7 +17,6 @@ library(AnnotationDbi)
 library(tidyverse)
 ```
 ```{r import}
-setwd("~/Desktop/Hayes 2021/github/Hayes_2021/Bulk_RNAseq_P4")
 load("../1.align/txi.rsem.RData")
 metadata <- read.csv("metadata.csv", stringsAsFactors = TRUE)
 rownames(metadata) <- metadata$ID
