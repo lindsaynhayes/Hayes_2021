@@ -50,7 +50,7 @@ Rescue of microglia bluting in protein expression Fig 4-5:
 MSN Electrophysiology Fig. 5, Ext Data 8:
 * [MIA MSN phenotype]( https://lindsaynhayes.github.io/Hayes_2021/Ephys/210907-Ephy-Analysis.html)
 * [Rescue of MSN]( https://lindsaynhayes.github.io/Hayes_2021/Ephys/210905-Ephy-Analysis.html)
-* [spine analysis]( https://lindsaynhayes.github.io/Hayes_2021/Ephys/Spine-Analysis_VS.html)
+* [Spine Analysis]( https://lindsaynhayes.github.io/Hayes_2021/Ephys/Spine-Analysis_VS.html)
 
 No Effect of Sex by qPCR Ext Data Fig 9:
 [qPCR]( https://lindsaynhayes.github.io/Hayes_2021/qPCR/QPCR-C8-26_pub.html)
