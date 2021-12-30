@@ -1,4 +1,4 @@
-# Hayes et al. 2022
+# Hayes et al. 2021
 
 Results and Scripts for Hayes et al. 2021 Nature can be found here:
 https://lindsaynhayes.github.io/Hayes_2021/
@@ -53,6 +53,3 @@ MSN Electrophysiology Fig. 5, Ext Data 8:
 - spine analysis: [link]( https://lindsaynhayes.github.io/Hayes_2021/Ephys/Spine-Analysis_VS.html)| [script](https://github.com/lindsaynhayes/Hayes_2021/blob/gh-pages/Ephys/Spine-Analysis_VS.Rmd)
 
 No Effect of Sex by qPCR Ext Data Fig 9: [link]( https://lindsaynhayes.github.io/Hayes_2021/qPCR/QPCR-C8-26_pub.html) | [script](https://github.com/lindsaynhayes/Hayes_2021/blob/gh-pages/qPCR/QPCR-C8-26_pub.Rmd)
-
-
-[TEXT](https://lindsaynhayes.github.io/Hayes_2021/x/y) | [script](https://github.com/lindsaynhayes/Hayes_2021/blob/gh-pages//.Rmd)

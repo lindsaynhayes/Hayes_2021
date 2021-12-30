@@ -41,8 +41,8 @@ Rescue of Microglia Blunting with Prenatal Microglia Replacement:
 * [Prenatal Microglia Ablation and Replacement]( https://lindsaynhayes.github.io/Hayes_2021/FACS/Fig_ED7e.html)
 * [3 Hour Maternal Serum]( https://lindsaynhayes.github.io/Hayes_2021/Serum/Maternal_Serum.html)
 * [Amelioration of Microglia Blunting]( https://lindsaynhayes.github.io/Hayes_2021/Bulk_RNAseq_Rescue_FACS/FACS_Rescue_LPS_pub.html)
-* [Ext Data Fig. 7: Rescue PCA]( https://lindsaynhayes.github.io/Hayes_2021/Bulk_RNAseq_Rescue_FACS/PCA_Clust.html)
-* [Ext Data Fig. 7: Rescue volcanos]( https://lindsaynhayes.github.io/Hayes_2021/Bulk_RNAseq_Rescue_FACS/Volcano.html)
+* [Rescue PCA]( https://lindsaynhayes.github.io/Hayes_2021/Bulk_RNAseq_Rescue_FACS/PCA_Clust.html)
+* [Rescue volcanos]( https://lindsaynhayes.github.io/Hayes_2021/Bulk_RNAseq_Rescue_FACS/Volcano.html)
 
 Rescue of microglia bluting in protein expression Fig 4-5:
  [Protein Rescue]( https://lindsaynhayes.github.io/Hayes_2021/Protein/MSD_Cells_Rescue_Stats.html)
@@ -50,9 +50,7 @@ Rescue of microglia bluting in protein expression Fig 4-5:
 MSN Electrophysiology Fig. 5, Ext Data 8:
 * [MIA MSN phenotype]( https://lindsaynhayes.github.io/Hayes_2021/Ephys/210907-Ephy-Analysis.html)
 * [Rescue of MSN]( https://lindsaynhayes.github.io/Hayes_2021/Ephys/210905-Ephy-Analysis.html)
-* [spine analysis]( https://lindsaynhayes.github.io/Hayes_2021/Ephys/Spine-Analysis_VS.html)
+* [Spine Analysis]( https://lindsaynhayes.github.io/Hayes_2021/Ephys/Spine-Analysis_VS.html)
 
 No Effect of Sex by qPCR Ext Data Fig 9:
 [qPCR]( https://lindsaynhayes.github.io/Hayes_2021/qPCR/QPCR-C8-26_pub.html)
-
-[T]( https://lindsaynhayes.github.io/Hayes_2021/x/y)
