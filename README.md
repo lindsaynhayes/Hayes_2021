@@ -24,7 +24,7 @@ MIA microglia morphology in Fig 1 & Ext Data Fig 4:
 
 Single Cell RNA sequencing in Fig 1, 4, & Ext Data 5: [script](https://github.com/lindsaynhayes/Hayes_2021/blob/gh-pages/SingleCell/10x_analysis_pub.r)
  
-Microglia In Vitro Activation in Fig 2 and Ext Data Fig 9: [link]( https://lindsaynhayes.github.io/Hayes_2021/InVitro/210903_invitro.html ) | [script](https://github.com/lindsaynhayes/Hayes_2021/blob/gh-pages/InVitro/210903_invitro.Rmd)
+Microglia In Vitro Activation in Fig 2 and Ext Data Fig 10: [link]( https://lindsaynhayes.github.io/Hayes_2021/InVitro/210903_invitro.html ) | [script](https://github.com/lindsaynhayes/Hayes_2021/blob/gh-pages/InVitro/210903_invitro.Rmd)
 
 RNA sequencing of neonatal microglia in Fig 2: [link]( https://lindsaynhayes.github.io/Hayes_2021/Bulk_RNAseq_P4/DESeq2_MACS_P4_Bulk_pub.html) | [script](https://github.com/lindsaynhayes/Hayes_2021/blob/gh-pages/Bulk_RNAseq_P4/DESeq2_MACS_P4_Bulk_pub.Rmd)
 
