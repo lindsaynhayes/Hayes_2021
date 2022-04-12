@@ -38,7 +38,7 @@ ATAC Sequencing in Fig 3:
 - ATAC: [link]( https://lindsaynhayes.github.io/Hayes_2021/ATAC/210329_ATAC_v3_MvCinLPS_pub.html ) | [script](https://github.com/lindsaynhayes/Hayes_2021/blob/gh-pages/ATAC/210329_ATAC_v3_MvCinLPS_pub.Rmd)
 - Validation by Gene Expression: [link]( https://lindsaynhayes.github.io/Hayes_2021/Bulk_RNAseq_FACS/QuickPlot_Pub.html) | [script](https://github.com/lindsaynhayes/Hayes_2021/blob/gh-pages/Bulk_RNAseq_FACS/QuickPlot_Pub.Rmd)
 
-Rescue of Microglia Blunting with Prenatal Microglia Replacement in Fig 4 and Ext Data Fig 8
+Rescue of Microglia Blunting with Prenatal Microglia Replacement in Fig 4 and Ext Data Fig 7-8
 - Prenatal Microglia Ablation and Replacement: [link]( https://lindsaynhayes.github.io/Hayes_2021/FACS/Fig_ED7e.html) | [script](https://github.com/lindsaynhayes/Hayes_2021/blob/gh-pages/FACS/Fig_ED7e.Rmd)
 - 3 Hour Maternal Serum: [link]( https://lindsaynhayes.github.io/Hayes_2021/Serum/Maternal_Serum.html) | [script](https://github.com/lindsaynhayes/Hayes_2021/blob/gh-pages/Serum/Maternal_Serum.Rmd)
 - Amelioration of Microglia Blunting: [link]( https://lindsaynhayes.github.io/Hayes_2021/Bulk_RNAseq_Rescue_FACS/FACS_Rescue_LPS_pub.html) | [script](https://github.com/lindsaynhayes/Hayes_2021/blob/gh-pages/Bulk_RNAseq_Rescue_FACS/FACS_Rescue_LPS_pub.Rmd)
