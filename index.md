@@ -1,4 +1,4 @@
-# **Data Analyses**
+# **Results and Scripts for Hayes et al. 2022 Nature**
 
 RNA sequencing analysis of microglia in Fig 1 & Ext Data Fig 1-3:
 * [MACS-MG Adult LPS Response]( https://lindsaynhayes.github.io/Hayes_2022/Bulk_RNAseq_MACS/DESeq2_MACS_Adult_Bulk_publication.html )
