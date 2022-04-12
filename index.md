@@ -1,4 +1,3 @@
-# Hayes 2022 Nature 
 ## Results & Scripts
 
 RNA sequencing analysis of microglia in Fig 1 & Ext Data Fig 1-3:
