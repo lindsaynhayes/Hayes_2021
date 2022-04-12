@@ -19,7 +19,7 @@ MIA microglia morphology in Fig 1 & Ext Data Fig 4:
 Single Cell RNA sequencing in Fig 1, 4, & Ext Data 5:
 [script](https://github.com/lindsaynhayes/Hayes_2022/blob/gh-pages/SingleCell/10x_analysis_pub.r)
  
-Microglia In Vitro Activation in Fig 2 and Ext Data Fig 9:
+Microglia In Vitro Activation in Fig 2 and Ext Data Fig 10:
  [In Vitro]( https://lindsaynhayes.github.io/Hayes_2022/InVitro/210903_invitro.html )
 
 RNA sequencing of neonatal microglia in Fig 2:
@@ -33,12 +33,12 @@ Disease enrichment of DEGs Fig 2g:
 * [SZ]( https://lindsaynhayes.github.io/Hayes_2022/Disease_Enrichment/SCZ.html )
 * [multiple comparison correction]( https://lindsaynhayes.github.io/Hayes_2022/Disease_Enrichment/P_correct.nb.html)
 
-ATAC Sequencing in Fig 3:
+ATAC Sequencing in Fig 3, Ext Data Fig 6:
 * [ATAC]( https://lindsaynhayes.github.io/Hayes_2022/ATAC/210329_ATAC_v3_MvCinLPS_pub.html )
 * [Validation by Gene Expression]( https://lindsaynhayes.github.io/Hayes_2022/Bulk_RNAseq_FACS/QuickPlot_Pub.html)
 * [PECA Network Analysis]( https://github.com/SUwonglab/PECA )
 
-Rescue of Microglia Blunting with Prenatal Microglia Replacement:
+Rescue of Microglia Blunting with Prenatal Microglia Replacement (Fig 4-5, Ext Data Fig 7-8):
 * [Prenatal Microglia Ablation and Replacement]( https://lindsaynhayes.github.io/Hayes_2022/FACS/Fig_ED7e.html)
 * [3 Hour Maternal Serum]( https://lindsaynhayes.github.io/Hayes_2022/Serum/Maternal_Serum.html)
 * [Amelioration of Microglia Blunting]( https://lindsaynhayes.github.io/Hayes_2022/Bulk_RNAseq_Rescue_FACS/FACS_Rescue_LPS_pub.html)
@@ -48,10 +48,10 @@ Rescue of Microglia Blunting with Prenatal Microglia Replacement:
 Rescue of microglia bluting in protein expression Fig 4-5:
  [Protein Rescue]( https://lindsaynhayes.github.io/Hayes_2022/Protein/MSD_Cells_Rescue_Stats.html)
 
-MSN Electrophysiology Fig. 5, Ext Data 8:
+MSN Electrophysiology Fig. 5, Ext Data 9:
 * [MIA MSN phenotype]( https://lindsaynhayes.github.io/Hayes_2022/Ephys/210907-Ephy-Analysis.html)
 * [Rescue of MSN]( https://lindsaynhayes.github.io/Hayes_2022/Ephys/210905-Ephy-Analysis.html)
 * [Spine Analysis]( https://lindsaynhayes.github.io/Hayes_2022/Ephys/Spine-Analysis_VS.html)
 
-No Effect of Sex by qPCR Ext Data Fig 9:
+No Effect of Sex by qPCR Ext Data Fig 10:
 [qPCR]( https://lindsaynhayes.github.io/Hayes_2022/qPCR/QPCR-C8-26_pub.html)
