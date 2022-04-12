@@ -37,6 +37,7 @@ Disease enrichment of DEGs Fig 2g:
 ATAC Sequencing in Fig 3:
 - ATAC: [link]( https://lindsaynhayes.github.io/Hayes_2021/ATAC/210329_ATAC_v3_MvCinLPS_pub.html ) | [script](https://github.com/lindsaynhayes/Hayes_2021/blob/gh-pages/ATAC/210329_ATAC_v3_MvCinLPS_pub.Rmd)
 - Validation by Gene Expression: [link]( https://lindsaynhayes.github.io/Hayes_2021/Bulk_RNAseq_FACS/QuickPlot_Pub.html) | [script](https://github.com/lindsaynhayes/Hayes_2021/blob/gh-pages/Bulk_RNAseq_FACS/QuickPlot_Pub.Rmd)
+- PECA Network Analysis in Ext Data Fig 6: [link]( https://github.com/SUwonglab/PECA )
 
 Rescue of Microglia Blunting with Prenatal Microglia Replacement in Fig 4 and Ext Data Fig 7-8
 - Prenatal Microglia Ablation and Replacement: [link]( https://lindsaynhayes.github.io/Hayes_2021/FACS/Fig_ED7e.html) | [script](https://github.com/lindsaynhayes/Hayes_2021/blob/gh-pages/FACS/Fig_ED7e.Rmd)
