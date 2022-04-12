@@ -1,7 +1,7 @@
-# Hayes et al. 2021
+# Hayes et al. 2022
 
-Results and Scripts for Hayes et al. 2021 Nature can be found here:
-https://lindsaynhayes.github.io/Hayes_2021/
+Results and Scripts for Hayes et al. 2022 Nature can be found here:
+https://lindsaynhayes.github.io/Hayes_2022/
 
 ## **Data Analyses**
 
@@ -22,7 +22,7 @@ MIA microglia morphology in Fig 1 & Ext Data Fig 4:
 
 Single Cell RNA sequencing in Fig 1, 4, & Ext Data 5: [script](https://github.com/lindsaynhayes/Hayes_2021/blob/gh-pages/SingleCell/10x_analysis_pub.r)
  
-Microglia In Vitro Activation in Fig 2 and Ext Data Fig 9: [link]( https://lindsaynhayes.github.io/Hayes_2021/InVitro/210903_invitro.html ) | [script](https://github.com/lindsaynhayes/Hayes_2021/blob/gh-pages/InVitro/210903_invitro.Rmd)
+Microglia In Vitro Activation in Fig 2 and Ext Data Fig 10: [link]( https://lindsaynhayes.github.io/Hayes_2021/InVitro/210903_invitro.html ) | [script](https://github.com/lindsaynhayes/Hayes_2021/blob/gh-pages/InVitro/210903_invitro.Rmd)
 
 RNA sequencing of neonatal microglia in Fig 2: [link]( https://lindsaynhayes.github.io/Hayes_2021/Bulk_RNAseq_P4/DESeq2_MACS_P4_Bulk_pub.html) | [script](https://github.com/lindsaynhayes/Hayes_2021/blob/gh-pages/Bulk_RNAseq_P4/DESeq2_MACS_P4_Bulk_pub.Rmd)
 
@@ -38,7 +38,7 @@ ATAC Sequencing in Fig 3:
 - ATAC: [link]( https://lindsaynhayes.github.io/Hayes_2021/ATAC/210329_ATAC_v3_MvCinLPS_pub.html ) | [script](https://github.com/lindsaynhayes/Hayes_2021/blob/gh-pages/ATAC/210329_ATAC_v3_MvCinLPS_pub.Rmd)
 - Validation by Gene Expression: [link]( https://lindsaynhayes.github.io/Hayes_2021/Bulk_RNAseq_FACS/QuickPlot_Pub.html) | [script](https://github.com/lindsaynhayes/Hayes_2021/blob/gh-pages/Bulk_RNAseq_FACS/QuickPlot_Pub.Rmd)
 
-Rescue of Microglia Blunting with Prenatal Microglia Replacement in Fig 4 and Ext Data Fig 7
+Rescue of Microglia Blunting with Prenatal Microglia Replacement in Fig 4 and Ext Data Fig 8
 - Prenatal Microglia Ablation and Replacement: [link]( https://lindsaynhayes.github.io/Hayes_2021/FACS/Fig_ED7e.html) | [script](https://github.com/lindsaynhayes/Hayes_2021/blob/gh-pages/FACS/Fig_ED7e.Rmd)
 - 3 Hour Maternal Serum: [link]( https://lindsaynhayes.github.io/Hayes_2021/Serum/Maternal_Serum.html) | [script](https://github.com/lindsaynhayes/Hayes_2021/blob/gh-pages/Serum/Maternal_Serum.Rmd)
 - Amelioration of Microglia Blunting: [link]( https://lindsaynhayes.github.io/Hayes_2021/Bulk_RNAseq_Rescue_FACS/FACS_Rescue_LPS_pub.html) | [script](https://github.com/lindsaynhayes/Hayes_2021/blob/gh-pages/Bulk_RNAseq_Rescue_FACS/FACS_Rescue_LPS_pub.Rmd)
@@ -47,9 +47,9 @@ Rescue of Microglia Blunting with Prenatal Microglia Replacement in Fig 4 and Ex
 
 Validation of the rescue of microglia bluting using protein expression Fig 4-5: [link]( https://lindsaynhayes.github.io/Hayes_2021/Protein/MSD_Cells_Rescue_Stats.html) | [script](https://github.com/lindsaynhayes/Hayes_2021/blob/gh-pages/Protein/MSD_Cells_Rescue_Stats.Rmd)
 
-MSN Electrophysiology Fig. 5, Ext Data 8:
+MSN Electrophysiology Fig. 5, Ext Data 9:
 - MIA MSN phenotype: [link]( https://lindsaynhayes.github.io/Hayes_2021/Ephys/210907-Ephy-Analysis.html)| [script](https://github.com/lindsaynhayes/Hayes_2021/blob/gh-pages/Ephys/210907-Ephy-Analysis.Rmd)
 - Rescue of MSN: [link]( https://lindsaynhayes.github.io/Hayes_2021/Ephys/210905-Ephy-Analysis.html)| [script](https://github.com/lindsaynhayes/Hayes_2021/blob/gh-pages/Ephys/210905-Ephy-Analysis.Rmd)
 - spine analysis: [link]( https://lindsaynhayes.github.io/Hayes_2021/Ephys/Spine-Analysis_VS.html)| [script](https://github.com/lindsaynhayes/Hayes_2021/blob/gh-pages/Ephys/Spine-Analysis_VS.Rmd)
 
-No Effect of Sex by qPCR Ext Data Fig 9: [link]( https://lindsaynhayes.github.io/Hayes_2021/qPCR/QPCR-C8-26_pub.html) | [script](https://github.com/lindsaynhayes/Hayes_2021/blob/gh-pages/qPCR/QPCR-C8-26_pub.Rmd)
+No Effect of Sex by qPCR Ext Data Fig 10: [link]( https://lindsaynhayes.github.io/Hayes_2021/qPCR/QPCR-C8-26_pub.html) | [script](https://github.com/lindsaynhayes/Hayes_2021/blob/gh-pages/qPCR/QPCR-C8-26_pub.Rmd)
