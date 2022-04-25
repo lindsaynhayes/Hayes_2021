@@ -38,7 +38,7 @@ conc %>% filter(Ab == "Stat2") %>% ggplot(., aes(x = Group, y=conc_pg.uL, fill =
 ```
 
 
-## Analysis of qPCR for transcription factor target genes compared to input control and represented as perecent fo input. 
+## Analysis of qPCR data for capture of transcription factor target genes compared to input control and represented as perecent of input. 
 
 ### IRF1
 ```{r}
