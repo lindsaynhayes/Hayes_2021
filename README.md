@@ -36,9 +36,11 @@ Disease enrichment of DEGs Fig 2g:
 - SZ: [link]( https://lindsaynhayes.github.io/Hayes_2021/Disease_Enrichment/SCZ.html ) | [script](https://github.com/lindsaynhayes/Hayes_2021/blob/gh-pages/Disease_Enrichment/SCZ.R)
 - multiple comparison correction: [link]( https://lindsaynhayes.github.io/Hayes_2021/Disease_Enrichment/P_correct.nb.html) | [script](https://github.com/lindsaynhayes/Hayes_2021/blob/gh-pages/Disease_Enrichment/P_correct.Rmd)
 
-ATAC Sequencing in Fig 3:
+ATAC Sequencing in Fig 3 & Ext Data Fig 6:
 - ATAC: [link]( https://lindsaynhayes.github.io/Hayes_2021/ATAC/210329_ATAC_v3_MvCinLPS_pub.html ) | [script](https://github.com/lindsaynhayes/Hayes_2021/blob/gh-pages/ATAC/210329_ATAC_v3_MvCinLPS_pub.Rmd)
 - Validation by Gene Expression: [link]( https://lindsaynhayes.github.io/Hayes_2021/Bulk_RNAseq_FACS/QuickPlot_Pub.html) | [script](https://github.com/lindsaynhayes/Hayes_2021/blob/gh-pages/Bulk_RNAseq_FACS/QuickPlot_Pub.Rmd)
+- PECA Network Analysis in Ext Data Fig 6: [link]( https://github.com/SUwonglab/PECA )
+- CUT&RUN Validation Analysis in Ext Data Fig 6: [link]( https://lindsaynhayes.github.io/Hayes_2022/CUT&RUN/CUT-RUN_pub.html ) | [script]( https://github.com/lindsaynhayes/Hayes_2022/blob/gh-pages/CUT&RUN/CUT&RUN_pub.Rmd )
 
 Rescue of Microglia Blunting with Prenatal Microglia Replacement in Fig 4 and Ext Data Fig 8
 - Prenatal Microglia Ablation and Replacement: [link]( https://lindsaynhayes.github.io/Hayes_2021/FACS/Fig_ED7e.html) | [script](https://github.com/lindsaynhayes/Hayes_2021/blob/gh-pages/FACS/Fig_ED7e.Rmd)
