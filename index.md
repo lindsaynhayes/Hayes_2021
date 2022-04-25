@@ -37,6 +37,7 @@ ATAC Sequencing in Fig 3, Ext Data Fig 6:
 * [ATAC]( https://lindsaynhayes.github.io/Hayes_2022/ATAC/210329_ATAC_v3_MvCinLPS_pub.html )
 * [Validation by Gene Expression]( https://lindsaynhayes.github.io/Hayes_2022/Bulk_RNAseq_FACS/QuickPlot_Pub.html)
 * [PECA Network Analysis]( https://github.com/SUwonglab/PECA )
+* [CUT&RUN]( https://lindsaynhayes.github.io/Hayes_2022/CUT&RUN/CUT-RUN_pub.html )
 
 Rescue of Microglia Blunting with Prenatal Microglia Replacement (Fig 4-5, Ext Data Fig 7-8):
 * [Prenatal Microglia Ablation and Replacement]( https://lindsaynhayes.github.io/Hayes_2022/FACS/Fig_ED7e.html)
