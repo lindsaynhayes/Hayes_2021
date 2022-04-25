@@ -1,0 +1,79 @@
+---
+title: "CUT&RUN"
+author: "LH"
+date: "4/25/2022"
+output: 
+  html_document: 
+    keep_md: yes
+editor_options: 
+  chunk_output_type: console
+---
+
+# CUT & RUN Analysis for validation of ATAC-seq and footprint analysis.
+```{r, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(ggplot2)
+library(cowplot)
+library(rstatix)
+```
+
+## Concentration after CUT & RUN Capture with Irf1 and Stat2
+```{r}
+conc <- read.csv("220425_picogreen.csv", stringsAsFactors = TRUE)
+
+conc %>% filter(Ab == "Irf1" & Group == "CON")  %>% shapiro_test(conc_pg.uL)
+conc %>% filter(Ab == "Irf1" & Group == "MIA")  %>% shapiro_test(conc_pg.uL)
+conc %>% filter(Ab == "Stat2" & Group == "CON")  %>% shapiro_test(conc_pg.uL)
+conc %>% filter(Ab == "Stat2" & Group == "MIA")  %>% shapiro_test(conc_pg.uL)
+
+conc %>% filter(Ab == "Irf1") %>% t.test(conc_pg.uL~ Group, data = ., var.equal = TRUE)
+
+conc %>% filter(Ab == "Stat2") %>% t.test(conc_pg.uL~ Group, data = ., var.equal = TRUE)
+
+
+conc %>% filter(Ab == "Irf1") %>% ggplot(., aes(x = Group, y=conc_pg.uL, fill = Group)) + geom_boxplot() + geom_point(size = 2) + theme_cowplot() + scale_fill_manual(values = c("grey", "red")) + theme(legend.position = "none") + ylim(0,100) + labs(subtitle = "Irf1")
+
+conc %>% filter(Ab == "Stat2") %>% ggplot(., aes(x = Group, y=conc_pg.uL, fill = Group)) + geom_boxplot() + geom_point(size = 2) + theme_cowplot() + scale_fill_manual(values = c("grey", "red")) + theme(legend.position = "none") + ylim(0,100) + labs(subtitle = "Stat2")
+
+```
+
+
+## Analysis of qPCR for transcription factor target genes compared to input control and represented as perecent fo input. 
+
+### IRF1
+```{r}
+data <- read.csv("220425_data.csv", stringsAsFactors = TRUE, header = TRUE)
+
+data %>% filter(Ab == "Irf1" & Target == "Fas" & Group == "CON")  %>% shapiro_test(percent.input)
+data %>% filter(Ab == "Irf1" & Target == "Fas" & Group == "MIA")  %>% shapiro_test(percent.input)
+
+data %>% filter(Ab == "Irf1" & Target == "IL6" & Group == "CON")  %>% shapiro_test(percent.input)
+data %>% filter(Ab == "Irf1" & Target == "IL6" & Group == "MIA")  %>% shapiro_test(percent.input)
+
+data %>% filter(Ab == "Irf1" & Target == "Fas")  %>% t.test(percent.input ~ Group, data = ., var.equal=T)
+data %>% filter(Ab == "Irf1" & Target == "IL6")  %>% t.test(percent.input ~ Group, data = ., var.equal=T)
+
+
+data %>% filter(Ab == "Irf1" & Target == "Fas") %>% 
+  ggplot(., aes(x = Group, y = percent.input, fill = Group)) + geom_boxplot() + geom_point(size = 2) + scale_fill_manual(values = c("grey", "red")) + theme_cowplot() + labs(subtitle = "Irf1 capture") + ylim(0,2) + theme(legend.position = "none") + ylab("% Input (Fas)")
+
+data %>% filter(Ab == "Irf1" & Target == "IL6") %>% 
+  ggplot(., aes(x = Group, y = percent.input, fill = Group)) + geom_boxplot() + geom_point(size = 2) + scale_fill_manual(values = c("grey", "red")) + theme_cowplot() + labs(subtitle = "Irf1 capture") + ylim(0,5) + theme(legend.position = "none") + ylab("% Input (IL-6)")
+```
+
+
+### Stat2
+```{r}
+
+Stat2 <- data %>% filter(Ab == "Stat2" & Sample != "21-75-3")
+# 21-75-3 showed 3x more expression than the remaining 3 animals
+
+Stat2 %>% filter(Target == "IL23" & Group == "CON")  %>% shapiro_test(percent.input)
+Stat2 %>% filter(Target == "IL23" & Group == "MIA")  %>% shapiro_test(percent.input)
+
+Stat2 %>% filter(Target == "IL23")  %>% t.test(percent.input ~ Group, data = ., var.equal=T)
+
+Stat2 %>% filter(Target == "IL23") %>% 
+  ggplot(., aes(x = Group, y = percent.input, fill = Group)) + geom_boxplot() + geom_point(size = 2) + scale_fill_manual(values = c("grey", "red")) + theme_cowplot() + labs(subtitle = "Stat2 capture") + ylim(0,2) + theme(legend.position = "none") + ylab("% Input (IL-23)")
+```
+
