@@ -20,11 +20,17 @@ library(ggplot2)
 library(cowplot)
 
 data = read_csv("160503.spines.csv")
+
+d = aggregate(data, by=list(data$Mouse, data$Group, data$Region, data$Cell), FUN=mean, na.rm=TRUE)
+d[,5:8]=NULL
+colnames(d)=c("Mouse","Group","Region","Cell","density")
+d  %>% filter(Region=="vs") %>% group_by(Group) %>% summarise(mouse = n_distinct(Mouse), cells=n())
+
+
 data2 = aggregate(data, by=list(data$Mouse, data$Group, data$Region), FUN=mean, na.rm=TRUE)
 data2[,4:7]=NULL
 colnames(data2)=c("Mouse","Group","Region","density")
 data2 = data2 %>% filter(Region=="vs")
-table(data2$Group)
 ```
 
 ## Plot data
