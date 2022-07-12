@@ -46,7 +46,7 @@ Survive %>% levene_test(IL.6.pg.mL ~ Dose)
 
 aov.out <- aov(IL.6.pg.mL ~ Dose, data=Survive)
 summary(aov.out)
-summary(glht(aov.out, linfct = mcp(Dose = "Tukey"), test = adjusted("BH")))
+summary(glht(aov.out, linfct = mcp(Dose = "Tukey")))
 ```
 
 **ELISA** data for maternal serum IL-6 response three hours after PIC treatment along with prenatal PLX treatment. Units of data are pg/mL.
@@ -73,7 +73,7 @@ Rescue %>% levene_test(log2.IL6 ~ Group)
 
 aov.out <- aov(log2.IL6 ~ Group, data=Rescue)
 summary(aov.out)
-summary(glht(aov.out, linfct = mcp(Group = c("CON:PLX - CON:CON == 0", "MIA:CON - CON:CON == 0", "MIA:PLX - CON:CON == 0", "MIA:PLX - MIA:CON == 0")), test = adjusted("BH")))
+summary(glht(aov.out, linfct = mcp(Group = c("CON:PLX - CON:CON == 0", "MIA:CON - CON:CON == 0", "MIA:PLX - CON:CON == 0", "MIA:PLX - MIA:CON == 0"))))
 ```
 
 ```{r}
